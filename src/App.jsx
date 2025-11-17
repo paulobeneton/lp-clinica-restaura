@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Phone, MapPin, Clock, Heart, ShieldCheck, 
-  Activity, Users, ArrowRight, CheckCircle2, Menu, X, Star
+  Activity, Users, ArrowRight, CheckCircle2, Menu, X, Star,
+  Trees, Home, Hospital, Landmark
 } from 'lucide-react';
 
 // --- CONFIGURAÇÃO DE ESTILO GLOBAL (Tipografia Premium) ---
@@ -22,7 +23,8 @@ const Button = ({ children, variant = 'primary', className = '', onClick, ...pro
     primary: "bg-orange-500 hover:bg-orange-600 text-white shadow-xl shadow-orange-500/20 transform hover:-translate-y-1", 
     secondary: "bg-teal-700 hover:bg-teal-800 text-white shadow-lg shadow-teal-700/20",
     outline: "border-2 border-white text-white hover:bg-white/10",
-    ghost: "text-slate-600 hover:text-teal-700 font-medium normal-case tracking-normal"
+    ghost: "text-slate-600 hover:text-teal-700 font-medium normal-case tracking-normal",
+    light: "bg-slate-100 hover:bg-slate-200 text-slate-700 shadow-sm"
   };
   
   return (
@@ -33,7 +35,7 @@ const Button = ({ children, variant = 'primary', className = '', onClick, ...pro
 };
 
 const Section = ({ children, className = '', id = '', bg = 'white' }) => (
-  <section id={id} className={`py-24 px-6 md:px-12 ${bg === 'gray' ? 'bg-slate-50' : 'bg-white'} ${className}`}>
+  <section id={id} className={`py-24 px-6 md:px-12 ${bg === 'gray' ? 'bg-slate-50' : bg === 'dark' ? 'bg-slate-900 text-white' : 'bg-white'} ${className}`}>
     {children}
   </section>
 );
@@ -42,7 +44,7 @@ const FadeIn = ({ children, delay = 0 }) => (
   <motion.div
     initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
+    viewport={{ once: true, amount: 0.2 }} // Ajustado para aparecer mais facilmente
     transition={{ duration: 0.7, delay, ease: "easeOut" }}
   >
     {children}
@@ -53,7 +55,8 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const scrollToForm = () => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
-  const handleWhatsApp = () => window.open('https://wa.me/5511999999999?text=Olá, gostaria de ajuda.', '_blank');
+  const handleWhatsApp = (number = '5511999999999') => window.open(`https://wa.me/${number}?text=Olá, gostaria de ajuda.`, '_blank');
+  const handlePhoneCall = (number = '08001234567') => window.open(`tel:${number}`, '_blank');
 
   return (
     <div className="bg-white text-slate-800 min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
@@ -78,7 +81,7 @@ export default function App() {
           <div className="hidden md:flex items-center gap-8">
             <a href="#tratamento" className="text-sm font-medium text-slate-500 hover:text-teal-700 transition">Tratamento</a>
             <a href="#diferenciais" className="text-sm font-medium text-slate-500 hover:text-teal-700 transition">A Clínica</a>
-            <a href="#localizacao" className="text-sm font-medium text-slate-500 hover:text-teal-700 transition">Local</a>
+            <a href="#unidades" className="text-sm font-medium text-slate-500 hover:text-teal-700 transition">Unidades</a> {/* Novo link */}
           </div>
 
           {/* CTA Navbar */}
@@ -87,8 +90,8 @@ export default function App() {
                 <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Plantão 24h</p>
                 <p className="text-lg font-bold text-slate-900">0800 123 4567</p>
              </div>
-             <Button variant="primary" onClick={handleWhatsApp} className="px-6 py-3 text-xs">
-               Ajuda Imediata
+             <Button variant="primary" onClick={() => handlePhoneCall('08001234567')} className="px-6 py-3 text-xs">
+               Ligar Agora
              </Button>
           </div>
 
@@ -107,21 +110,21 @@ export default function App() {
             <div className="flex flex-col p-6 gap-4">
               <a href="#tratamento" onClick={() => setIsMenuOpen(false)} className="font-medium text-slate-700">Tratamento</a>
               <a href="#diferenciais" onClick={() => setIsMenuOpen(false)} className="font-medium text-slate-700">A Clínica</a>
-              <a href="#contato" onClick={() => setIsMenuOpen(false)} className="font-medium text-slate-700">Contato</a>
+              <a href="#unidades" onClick={() => setIsMenuOpen(false)} className="font-medium text-slate-700">Unidades</a>
               <Button variant="primary" onClick={handleWhatsApp} className="w-full">Chamar no WhatsApp</Button>
             </div>
           </motion.div>
         )}
       </nav>
 
-      {/* 1️⃣ HERO SECTION (Imagem + CTA) */}
+      {/* 1️⃣ HERO SECTION (Imagem + CTA) - CORRIGIDO */}
       <div className="relative min-h-[90vh] flex items-center bg-slate-900 overflow-hidden">
-        {/* Imagem Background - Natureza/Paz */}
+        {/* Nova Imagem Background - Natureza/Paz */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?q=80&w=2670&auto=format&fit=crop" 
-            alt="Paz e Recuperação" 
-            className="w-full h-full object-cover opacity-40"
+            src="https://images.unsplash.com/photo-1549490237-7e67f730c455?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+            alt="Refúgio de Paz e Recuperação na Natureza" 
+            className="w-full h-full object-cover opacity-30" // Opacidade ajustada
           />
           {/* Gradiente Profissional para Leitura */}
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
@@ -232,64 +235,92 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 4️⃣ DIFERENCIAIS + GRID */}
-      <Section id="diferenciais" className="bg-slate-900 text-white overflow-hidden relative">
-         {/* Background Decorativo */}
-         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[100px]"></div>
+      {/* 4️⃣ DIFERENCIAIS + GRID - CORRIGIDO */}
+      <Section id="diferenciais" bg="white" className="overflow-hidden relative">
+         {/* Removido o background decorativo azul pois o fundo agora é branco */}
          
          <div className="container mx-auto relative z-10">
            <div className="text-center mb-16">
-             <span className="text-teal-400 font-bold uppercase tracking-widest text-xs">Estrutura Premium</span>
-             <h2 className="text-3xl md:text-5xl font-bold mt-4">Por que somos referência?</h2>
+             <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Estrutura Premium</span>
+             <h2 className="text-3xl md:text-5xl font-bold mt-4 text-slate-900">Por que somos referência?</h2> {/* Corrigido texto */}
            </div>
 
            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
              {[
-               { icon: <Clock />, label: "Plantão 24 Horas" },
-               { icon: <ShieldCheck />, label: "Segurança Total" },
-               { icon: <Activity />, label: "Médicos Diários" },
-               { icon: <Users />, label: "Terapia Familiar" },
+               { icon: <Clock className="text-teal-600" size={32} />, label: "Plantão 24 Horas" },
+               { icon: <ShieldCheck className="text-teal-600" size={32} />, label: "Segurança Total" },
+               { icon: <Activity className="text-teal-600" size={32} />, label: "Médicos Diários" },
+               { icon: <Users className="text-teal-600" size={32} />, label: "Terapia Familiar" },
              ].map((dif, i) => (
-               <div key={i} className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 flex flex-col items-center justify-center gap-4 hover:bg-white/10 transition">
-                 <div className="text-teal-400">{dif.icon}</div>
-                 <span className="font-semibold">{dif.label}</span>
-               </div>
+               <FadeIn key={i} delay={i * 0.1}> {/* Adicionado FadeIn */}
+                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center justify-center gap-4 hover:bg-slate-100 transition shadow-sm">
+                   {dif.icon}
+                   <span className="font-semibold text-slate-700">{dif.label}</span> {/* Corrigido texto */}
+                 </div>
+               </FadeIn>
              ))}
            </div>
          </div>
       </Section>
 
-      {/* 5️⃣ LOCALIZAÇÃO */}
-      <Section id="localizacao">
-        <div className="container mx-auto flex flex-col lg:flex-row gap-12 items-center">
-          <div className="lg:w-1/2 space-y-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Um refúgio de paz para o recomeço.</h2>
-            <p className="text-slate-500 text-lg leading-relaxed">
-              Nossa clínica está situada em uma área de preservação ambiental, longe do ruído urbano, proporcionando o silêncio necessário para a reflexão.
-            </p>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-slate-700 font-medium">
-                <CheckCircle2 className="text-teal-600" size={20} /> Piscina e Área de Lazer
-              </li>
-              <li className="flex items-center gap-3 text-slate-700 font-medium">
-                <CheckCircle2 className="text-teal-600" size={20} /> Acomodações Confortáveis (Suítes)
-              </li>
-              <li className="flex items-center gap-3 text-slate-700 font-medium">
-                <CheckCircle2 className="text-teal-600" size={20} /> Alimentação Balanceada (Nutricionista)
-              </li>
-            </ul>
-            <Button variant="secondary" onClick={handleWhatsApp}>Agendar Visita</Button>
-          </div>
-          <div className="lg:w-1/2 w-full">
-             <div className="aspect-video bg-slate-200 rounded-2xl overflow-hidden relative shadow-2xl">
-               {/* Imagem do Mapa (Simulação) */}
-               <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2674&auto=format&fit=crop" className="w-full h-full object-cover" alt="Local" />
-               <div className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition">
-                 <div className="bg-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 font-bold text-slate-900 cursor-pointer hover:scale-105 transition-transform">
-                   <MapPin className="text-red-500" /> Ver no Mapa
-                 </div>
-               </div>
-             </div>
+      {/* 5️⃣ LOCALIZAÇÃO - AGORA SÃO 3 UNIDADES */}
+      <Section id="unidades" bg="gray">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Nossas Unidades</h2>
+          <p className="text-slate-500 text-lg mb-16 max-w-3xl mx-auto">
+            Com unidades estrategicamente localizadas, oferecemos um ambiente propício à recuperação em diferentes regiões.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { 
+                image: "https://images.unsplash.com/photo-1550993074-0f2c41804702?q=80&w=2670&auto=format&fit=crop", 
+                title: "Unidade I - Campo Limpo Paulista", 
+                address: "Rua das Flores, 123 - Centro", 
+                city: "Campo Limpo Paulista, SP",
+                phone: "(11) 98765-4321",
+                mapLink: "https://maps.app.goo.gl/seu-endereco-unidade-1"
+              },
+              { 
+                image: "https://images.unsplash.com/photo-1582234057917-a9a7a13d7890?q=80&w=2670&auto=format&fit=crop", 
+                title: "Unidade II - Serra da Cantareira", 
+                address: "Estrada da Mata, 456 - Zona Rural", 
+                city: "Mairiporã, SP",
+                phone: "(11) 99887-6655",
+                mapLink: "https://maps.app.goo.gl/seu-endereco-unidade-2"
+              },
+              { 
+                image: "https://images.unsplash.com/photo-1627725917452-957262841f3e?q=80&w=2670&auto=format&fit=crop", 
+                title: "Unidade III - Litoral Sul", 
+                address: "Av. Beira Mar, 789 - Centro", 
+                city: "Guarujá, SP",
+                phone: "(13) 97654-3210",
+                mapLink: "https://maps.app.goo.gl/seu-endereco-unidade-3"
+              },
+            ].map((unit, idx) => (
+              <FadeIn key={idx} delay={idx * 0.1}>
+                <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden h-full flex flex-col">
+                  <div className="h-48 w-full bg-slate-200">
+                    <img src={unit.image} alt={`Unidade ${unit.title}`} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-8 flex-grow flex flex-col items-center justify-center">
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">{unit.title}</h3>
+                    <p className="text-slate-600 text-sm mb-2">{unit.address}</p>
+                    <p className="text-slate-500 text-sm mb-6">{unit.city}</p>
+                    <div className="flex flex-col gap-3 w-full">
+                      <Button variant="light" className="w-full" onClick={() => handleWhatsApp(unit.phone.replace(/\D/g, ''))}>
+                        <Phone size={16} className="text-green-500" /> WhatsApp
+                      </Button>
+                      <a href={unit.mapLink} target="_blank" rel="noopener noreferrer" className="w-full">
+                         <Button variant="secondary" className="w-full">
+                           <MapPin size={16} /> Ver no Mapa
+                         </Button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </Section>
@@ -354,6 +385,16 @@ export default function App() {
           <p className="text-slate-400 text-sm">© 2025 Grupo Restaura Vidas. Todos os direitos reservados.</p>
         </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <a 
+        href="https://wa.me/5511999999999" 
+        target="_blank"
+        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl z-50 transition-transform hover:scale-110 flex items-center gap-2"
+      >
+        <Phone size={24} fill="currentColor" />
+        <span className="hidden md:inline font-bold">Falar no WhatsApp</span>
+      </a>
 
     </div>
   );
