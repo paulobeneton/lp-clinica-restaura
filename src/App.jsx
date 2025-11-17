@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Phone, MapPin, Clock, Heart, ShieldCheck, 
-  Activity, Users, ArrowRight, CheckCircle2, Menu, X, Star,
-  MessageCircle, ChevronDown, Home, Lock, Smile
+  Activity, Users, CheckCircle2, Menu, X, Star,
+  MessageCircle, ChevronDown, Home, Lock
 } from 'lucide-react';
 
 // --- CONFIGURAÇÃO GLOBAL ---
@@ -24,7 +24,7 @@ const Button = ({ children, variant = 'primary', className = '', onClick, ...pro
     secondary: "bg-teal-600 hover:bg-teal-700 text-white shadow-teal-600/20 transform hover:-translate-y-1",
     outline: "border-2 border-white text-white hover:bg-white/10",
     ghost: "text-slate-600 hover:text-teal-600 font-medium bg-slate-100 hover:bg-slate-200",
-    whatsapp: "bg-green-500 hover:bg-green-600 text-white shadow-green-500/20"
+    light: "bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200"
   };
   
   return (
@@ -83,7 +83,7 @@ export default function App() {
   const [openFaq, setOpenFaq] = useState(null);
   
   const scrollToForm = () => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
-  const handleWhatsApp = () => window.open('https://wa.me/5511999999999?text=Olá, preciso de ajuda.', '_blank');
+  const handleWhatsApp = (number = '5511999999999') => window.open(`https://wa.me/${number}?text=Olá, preciso de ajuda.`, '_blank');
   const handleCall = () => window.open('tel:08001234567', '_self');
 
   return (
@@ -105,7 +105,7 @@ export default function App() {
 
           <div className="hidden md:flex items-center gap-8 font-medium text-slate-600">
             <a href="#sobre" className="hover:text-teal-600 transition">Por que nós?</a>
-            <a href="#depoimentos" className="hover:text-teal-600 transition">Depoimentos</a>
+            <a href="#unidades" className="hover:text-teal-600 transition">Unidades</a>
             <a href="#faq" className="hover:text-teal-600 transition">Dúvidas</a>
             <div className="flex items-center gap-4 pl-4 border-l border-slate-200">
               <div className="text-right hidden lg:block">
@@ -126,29 +126,27 @@ export default function App() {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-b border-slate-200 p-4 flex flex-col gap-4 shadow-xl">
             <a href="#sobre" onClick={() => setIsMenuOpen(false)}>Por que nós?</a>
-            <a href="#depoimentos" onClick={() => setIsMenuOpen(false)}>Depoimentos</a>
+            <a href="#unidades" onClick={() => setIsMenuOpen(false)}>Unidades</a>
             <a href="#contato" onClick={() => setIsMenuOpen(false)}>Contato</a>
             <Button variant="primary" onClick={handleCall} className="w-full">Ligar Agora</Button>
           </div>
         )}
       </nav>
 
-      {/* 1️⃣ HERO SECTION (CORRIGIDA E APRIMORADA) */}
+      {/* 1️⃣ HERO SECTION */}
       <div className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 bg-slate-900 overflow-hidden">
-        {/* Imagem de Fundo (Garante carregamento) */}
+        {/* Imagem de Fundo */}
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2670&auto=format&fit=crop" 
             alt="Background" 
             className="w-full h-full object-cover opacity-20"
           />
-          {/* Gradiente para legibilidade */}
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-transparent"></div>
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-            
             {/* Texto (Esquerda) */}
             <div className="lg:w-1/2 text-center lg:text-left">
               <FadeIn>
@@ -166,7 +164,7 @@ export default function App() {
                   <Button variant="primary" onClick={scrollToForm} className="text-lg px-8">
                     Quero ajuda agora
                   </Button>
-                  <Button variant="outline" onClick={handleWhatsApp} className="border-slate-600 text-white hover:bg-white/10 hover:border-white">
+                  <Button variant="outline" onClick={() => handleWhatsApp()} className="border-slate-600 text-white hover:bg-white/10 hover:border-white">
                     <MessageCircle size={20} /> Falar no WhatsApp
                   </Button>
                 </div>
@@ -176,8 +174,7 @@ export default function App() {
                 </div>
               </FadeIn>
             </div>
-
-            {/* Imagem Direita (Nova Adição) */}
+            {/* Imagem Direita */}
             <div className="lg:w-1/2 w-full hidden lg:block">
               <FadeIn delay={0.2}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10">
@@ -198,12 +195,11 @@ export default function App() {
                 </div>
               </FadeIn>
             </div>
-
           </div>
         </div>
       </div>
 
-      {/* 2️⃣ POR QUE NOS ESCOLHER (Design Solicitado) */}
+      {/* 2️⃣ POR QUE NOS ESCOLHER */}
       <Section id="sobre" className="bg-slate-50">
         <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -245,7 +241,6 @@ export default function App() {
               },
             ].map((item, idx) => (
               <FadeIn key={idx} delay={idx * 0.1}>
-                {/* Card Estilo Clean */}
                 <div className="h-full p-1 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 group">
                   <div className="flex flex-col items-start p-6 h-full">
                     <div className="w-14 h-14 bg-teal-100 text-teal-700 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-teal-600 group-hover:text-white transition-colors">
@@ -261,8 +256,70 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 3️⃣ HISTÓRIAS DE TRANSFORMAÇÃO (Depoimentos) */}
-      <Section id="depoimentos" className="bg-white">
+      {/* 3️⃣ NOSSAS UNIDADES (RECUPERADA) */}
+      <Section id="unidades" className="bg-white border-t border-slate-100">
+        <div className="container mx-auto text-center">
+          <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Estrutura Premium</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 mt-2">Nossas Unidades</h2>
+          <p className="text-slate-500 text-lg mb-16 max-w-3xl mx-auto">
+            Com unidades estrategicamente localizadas, oferecemos um ambiente propício à recuperação em diferentes regiões.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { 
+                image: "https://images.unsplash.com/photo-1550993074-0f2c41804702?q=80&w=2670&auto=format&fit=crop", 
+                title: "Unidade I - Campo Limpo", 
+                address: "Rua das Flores, 123", 
+                city: "Campo Limpo Paulista, SP",
+                phone: "5511987654321",
+                mapLink: "http://maps.google.com"
+              },
+              { 
+                image: "https://images.unsplash.com/photo-1582234057917-a9a7a13d7890?q=80&w=2670&auto=format&fit=crop", 
+                title: "Unidade II - Cantareira", 
+                address: "Estrada da Mata, 456", 
+                city: "Mairiporã, SP",
+                phone: "5511998876655",
+                mapLink: "http://maps.google.com"
+              },
+              { 
+                image: "https://images.unsplash.com/photo-1627725917452-957262841f3e?q=80&w=2670&auto=format&fit=crop", 
+                title: "Unidade III - Litoral", 
+                address: "Av. Beira Mar, 789", 
+                city: "Guarujá, SP",
+                phone: "5513976543210",
+                mapLink: "http://maps.google.com"
+              },
+            ].map((unit, idx) => (
+              <FadeIn key={idx} delay={idx * 0.1}>
+                <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden h-full flex flex-col group hover:-translate-y-2 transition-transform duration-300">
+                  <div className="h-56 w-full bg-slate-200 overflow-hidden">
+                    <img src={unit.image} alt={`Unidade ${unit.title}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                  </div>
+                  <div className="p-8 flex-grow flex flex-col items-center justify-center">
+                    <h3 className="text-xl font-bold text-slate-900 mb-1">{unit.title}</h3>
+                    <p className="text-slate-500 text-sm mb-6">{unit.city}</p>
+                    <div className="flex flex-col gap-3 w-full">
+                      <Button variant="light" className="w-full" onClick={() => handleWhatsApp(unit.phone)}>
+                        <MessageCircle size={16} className="text-green-500" /> WhatsApp
+                      </Button>
+                      <a href={unit.mapLink} target="_blank" rel="noopener noreferrer" className="w-full">
+                         <Button variant="secondary" className="w-full">
+                           <MapPin size={16} /> Ver no Mapa
+                         </Button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* 4️⃣ HISTÓRIAS DE TRANSFORMAÇÃO */}
+      <Section id="depoimentos" className="bg-slate-50">
         <div className="container mx-auto text-center">
           <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Resultados Reais</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 text-slate-900 mb-16">Histórias de Transformação</h2>
@@ -286,11 +343,11 @@ export default function App() {
               }
             ].map((depo, idx) => (
               <FadeIn key={idx} delay={idx * 0.1}>
-                <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 text-left hover:shadow-lg transition relative">
+                <div className="bg-white p-8 rounded-3xl border border-slate-100 text-left hover:shadow-lg transition relative h-full flex flex-col">
                   <div className="flex gap-1 mb-4 text-orange-400">
                     {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
                   </div>
-                  <p className="text-slate-600 italic mb-6">"{depo.text}"</p>
+                  <p className="text-slate-600 italic mb-6 flex-grow">"{depo.text}"</p>
                   <div>
                     <p className="font-bold text-slate-900">{depo.author}</p>
                     <p className="text-xs text-slate-400 uppercase font-bold">{depo.role}</p>
@@ -302,8 +359,8 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 4️⃣ PERGUNTAS FREQUENTES (FAQ) */}
-      <Section id="faq" bg="gray">
+      {/* 5️⃣ FAQ */}
+      <Section id="faq" className="bg-white">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-900">Perguntas Frequentes</h2>
@@ -329,7 +386,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 5️⃣ CONTATO MELHORADO */}
+      {/* 6️⃣ CONTATO MELHORADO */}
       <Section id="contato" className="bg-blue-900 text-white">
         <div className="container mx-auto max-w-5xl">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
@@ -349,7 +406,7 @@ export default function App() {
                     <Phone size={24} /> LIGAR 0800 123 4567
                   </button>
                   
-                  <button onClick={handleWhatsApp} className="w-full bg-green-500 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-3 hover:bg-green-600 transition shadow-lg">
+                  <button onClick={() => handleWhatsApp()} className="w-full bg-green-500 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-3 hover:bg-green-600 transition shadow-lg">
                     <MessageCircle size={24} /> CHAMAR NO WHATSAPP
                   </button>
                 </div>
