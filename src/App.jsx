@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Phone, MapPin, Clock, Heart, ShieldCheck, 
-  Activity, Users, CheckCircle2, Menu, X, Star,
-  MessageCircle, ChevronDown, Home, Lock
+  Activity, Users, ArrowRight, CheckCircle2, Menu, X, Star,
+  MessageCircle, ChevronDown, Home, Lock, Stethoscope, 
+  Utensils, Brain, Leaf, AlertTriangle, Coins, Pill
 } from 'lucide-react';
 
 // --- CONFIGURAÇÃO GLOBAL ---
@@ -83,7 +84,7 @@ export default function App() {
   const [openFaq, setOpenFaq] = useState(null);
   
   const scrollToForm = () => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
-  const handleWhatsApp = (number = '5511999999999') => window.open(`https://wa.me/${number}?text=Olá, preciso de ajuda.`, '_blank');
+  const handleWhatsApp = (number = '5511999999999') => window.open(`https://wa.me/${number}?text=Olá, preciso de ajuda com internamento.`, '_blank');
   const handleCall = () => window.open('tel:08001234567', '_self');
 
   return (
@@ -104,9 +105,9 @@ export default function App() {
           </div>
 
           <div className="hidden md:flex items-center gap-8 font-medium text-slate-600">
-            <a href="#sobre" className="hover:text-teal-600 transition">Por que nós?</a>
+            <a href="#tratamento" className="hover:text-teal-600 transition">Tratamento</a>
+            <a href="#equipe" className="hover:text-teal-600 transition">Equipe & Rotina</a>
             <a href="#unidades" className="hover:text-teal-600 transition">Unidades</a>
-            <a href="#faq" className="hover:text-teal-600 transition">Dúvidas</a>
             <div className="flex items-center gap-4 pl-4 border-l border-slate-200">
               <div className="text-right hidden lg:block">
                 <p className="text-xs text-slate-400 font-bold uppercase">Emergência 24h</p>
@@ -125,9 +126,9 @@ export default function App() {
 
         {isMenuOpen && (
           <div className="md:hidden bg-white border-b border-slate-200 p-4 flex flex-col gap-4 shadow-xl">
-            <a href="#sobre" onClick={() => setIsMenuOpen(false)}>Por que nós?</a>
+            <a href="#tratamento" onClick={() => setIsMenuOpen(false)}>Tratamento</a>
+            <a href="#equipe" onClick={() => setIsMenuOpen(false)}>Equipe</a>
             <a href="#unidades" onClick={() => setIsMenuOpen(false)}>Unidades</a>
-            <a href="#contato" onClick={() => setIsMenuOpen(false)}>Contato</a>
             <Button variant="primary" onClick={handleCall} className="w-full">Ligar Agora</Button>
           </div>
         )}
@@ -199,8 +200,209 @@ export default function App() {
         </div>
       </div>
 
-      {/* 2️⃣ POR QUE NOS ESCOLHER */}
-      <Section id="sobre" className="bg-slate-50">
+      {/* 2️⃣ O QUE TRATAMOS (NOVA SEÇÃO) */}
+      <Section className="bg-white border-b border-slate-100 py-12">
+        <div className="container mx-auto text-center">
+           <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-8">Especialistas em Recuperação de:</p>
+           <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+              {[
+                { name: "Álcool", icon: <Utensils size={24} /> },
+                { name: "Drogas", icon: <Leaf size={24} /> },
+                { name: "Medicamentos", icon: <Pill size={24} /> },
+                { name: "Jogos (Bets)", icon: <Coins size={24} /> },
+                { name: "Outros Vícios", icon: <AlertTriangle size={24} /> },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3 text-slate-600 font-semibold opacity-70 hover:opacity-100 hover:text-teal-600 transition cursor-default">
+                  {item.icon} {item.name}
+                </div>
+              ))}
+           </div>
+        </div>
+      </Section>
+
+      {/* 3️⃣ CONEXÃO EMOCIONAL */}
+      <Section className="bg-slate-50 text-center max-w-5xl mx-auto">
+        <FadeIn>
+          <div className="mb-8 flex justify-center">
+            <div className="bg-teal-100 p-4 rounded-full text-teal-600">
+              <Users size={40} />
+            </div>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+            Entendemos o que você está passando
+          </h2>
+          <p className="text-xl text-slate-600 leading-relaxed mb-8 max-w-3xl mx-auto">
+            Sabemos que pedir ajuda não é fácil. Muitos tentam sozinhos, mas recaem. 
+            Aqui, você encontra <span className="font-bold text-teal-700">acolhimento, cuidado e tratamento especializado</span> — sem julgamentos, focados em recomeços reais.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-6 text-left mt-12">
+             {[
+               "Ambiente seguro e humanizado",
+               "Equipe multidisciplinar 24h",
+               "Foco em recomeços duradouros"
+             ].map((item, i) => (
+               <div key={i} className="flex items-center gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                 <CheckCircle2 className="text-green-500 shrink-0" />
+                 <span className="font-medium text-slate-700">{item}</span>
+               </div>
+             ))}
+          </div>
+        </FadeIn>
+      </Section>
+
+      {/* 4️⃣ JORNADA DE TRATAMENTO (ATUALIZADA COM DADOS OFICIAIS) */}
+      <Section id="tratamento" className="bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Metodologia Exclusiva</span>
+            <h2 className="text-3xl font-bold text-slate-900 mt-2 mb-4">Plano de Tratamento em 3 Etapas</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              A dependência química é uma doença progressiva e incurável, mas tratável. 
+              Nosso modelo baseia-se na conscientização e nos 12 Passos.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 relative">
+             {/* Linha Conectora */}
+             <div className="hidden md:block absolute top-8 left-0 w-full h-1 bg-slate-100 -z-10"></div>
+
+            {/* Etapa 1 */}
+            <FadeIn delay={0.1}>
+              <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 h-full hover:shadow-lg transition-all relative">
+                <div className="bg-orange-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-white font-bold text-2xl shadow-lg shadow-orange-500/30">1</div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Desintoxicação</h3>
+                <span className="text-xs font-bold text-orange-500 uppercase tracking-wider mb-4 block">1º e 2º Mês</span>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Adaptação ao convívio e desintoxicação física. Foco na reeducação alimentar e recuperação dos aspectos físicos fragilizados pelo uso compulsivo.
+                </p>
+              </div>
+            </FadeIn>
+
+            {/* Etapa 2 */}
+            <FadeIn delay={0.2}>
+              <div className="bg-white p-8 rounded-2xl border-2 border-teal-500 shadow-xl h-full transform md:-translate-y-4 relative">
+                <div className="bg-teal-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-white font-bold text-2xl shadow-lg shadow-teal-600/30">2</div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Conscientização</h3>
+                <span className="text-xs font-bold text-teal-600 uppercase tracking-wider mb-4 block">3º e 4º Mês</span>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Aspecto psicológico profundo. Autoconhecimento do eu interior e da doença. Aplicação intensiva de terapias e psicologia aplicada.
+                </p>
+              </div>
+            </FadeIn>
+
+            {/* Etapa 3 */}
+            <FadeIn delay={0.3}>
+              <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 h-full hover:shadow-lg transition-all relative">
+                <div className="bg-blue-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-white font-bold text-2xl shadow-lg shadow-blue-500/30">3</div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Ressocialização</h3>
+                <span className="text-xs font-bold text-blue-500 uppercase tracking-wider mb-4 block">5º e 6º Mês</span>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Aspecto Espiritual e valorização da vida. Fortalecimento da fé em um poder superior e preparação para o retorno social e familiar.
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </Section>
+
+      {/* 5️⃣ ESTRUTURA TÉCNICA E ATIVIDADES (NOVA SEÇÃO DETALHADA) */}
+      <Section id="equipe" className="bg-slate-900 text-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Excelência no Cuidado</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Nossa metodologia combina acompanhamento médico rigoroso, disciplina e uma rotina terapêutica completa para ocupar a mente e curar o corpo.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {/* Coluna 1: Equipe */}
+            <FadeIn delay={0.1}>
+              <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 h-full">
+                <div className="flex items-center gap-3 mb-6 text-teal-400">
+                  <Stethoscope size={28} />
+                  <h3 className="text-xl font-bold text-white">Equipe Técnica</h3>
+                </div>
+                <ul className="space-y-4">
+                  {[
+                    "Psiquiatra",
+                    "Psicóloga",
+                    "Enfermeira Padrão",
+                    "Terapeutas (24 Horas)",
+                    "Coordenadores (24 Horas)"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-slate-300 text-sm border-b border-white/5 pb-2 last:border-0">
+                      <CheckCircle2 size={16} className="text-teal-500" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+
+            {/* Coluna 2: Terapias Específicas */}
+            <FadeIn delay={0.2}>
+              <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 h-full">
+                <div className="flex items-center gap-3 mb-6 text-orange-400">
+                  <Brain size={28} />
+                  <h3 className="text-xl font-bold text-white">Terapias Aplicadas</h3>
+                </div>
+                <ul className="space-y-3 text-sm text-slate-300">
+                  <li className="mb-2">
+                    <strong className="text-white block">P.P.R (Prevenção a Recaída)</strong>
+                    Ferramentas de "Evite e Procure" para a vida pós-internação.
+                  </li>
+                  <li className="mb-2">
+                    <strong className="text-white block">T.R.E (Racional Emotiva)</strong>
+                    Aprender a lidar com Raiva, Vergonha e Luto.
+                  </li>
+                  <li className="mb-2">
+                    <strong className="text-white block">Laborterapia</strong>
+                    Terapia do trabalho para disciplina e autoestima.
+                  </li>
+                  <li>
+                    <strong className="text-white block">Reunião de Sentimentos</strong>
+                    Partilha e identificação de emoções em grupo.
+                  </li>
+                </ul>
+              </div>
+            </FadeIn>
+
+            {/* Coluna 3: Rotina e Alimentação */}
+            <FadeIn delay={0.3}>
+              <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 h-full">
+                <div className="flex items-center gap-3 mb-6 text-green-400">
+                  <Utensils size={28} />
+                  <h3 className="text-xl font-bold text-white">Rotina Saudável</h3>
+                </div>
+                <div className="mb-6">
+                  <h4 className="font-bold text-white text-sm mb-3 uppercase tracking-wider">4 Refeições Diárias</h4>
+                  <div className="grid grid-cols-2 gap-2 text-xs text-slate-300">
+                    <span className="bg-white/10 px-3 py-1 rounded">Café da Manhã</span>
+                    <span className="bg-white/10 px-3 py-1 rounded">Almoço</span>
+                    <span className="bg-white/10 px-3 py-1 rounded">Café da Tarde</span>
+                    <span className="bg-white/10 px-3 py-1 rounded">Jantar</span>
+                  </div>
+                </div>
+                <div>
+                   <h4 className="font-bold text-white text-sm mb-3 uppercase tracking-wider">Atividades</h4>
+                   <ul className="space-y-2 text-slate-300 text-sm">
+                      <li>• Educação Física</li>
+                      <li>• Meditação / Relaxamento</li>
+                      <li>• Espiritualidade (Manhã)</li>
+                      <li>• Reuniões de N.A. e A.A.</li>
+                   </ul>
+                </div>
+              </div>
+            </FadeIn>
+
+          </div>
+        </div>
+      </Section>
+
+      {/* 6️⃣ POR QUE NOS ESCOLHER (DESIGN SOLICITADO) */}
+      <Section id="diferenciais" className="bg-slate-50">
         <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Por Que Nos Escolher</h2>
@@ -256,7 +458,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 3️⃣ NOSSAS UNIDADES (RECUPERADA) */}
+      {/* 7️⃣ NOSSAS UNIDADES */}
       <Section id="unidades" className="bg-white border-t border-slate-100">
         <div className="container mx-auto text-center">
           <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Estrutura Premium</span>
@@ -318,7 +520,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 4️⃣ HISTÓRIAS DE TRANSFORMAÇÃO */}
+      {/* 8️⃣ HISTÓRIAS DE TRANSFORMAÇÃO */}
       <Section id="depoimentos" className="bg-slate-50">
         <div className="container mx-auto text-center">
           <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Resultados Reais</span>
@@ -359,7 +561,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 5️⃣ FAQ */}
+      {/* 9️⃣ FAQ */}
       <Section id="faq" className="bg-white">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-12">
@@ -372,7 +574,7 @@ export default function App() {
               { q: "Vocês aceitam plano de saúde?", a: "Sim, trabalhamos com reembolso assistido e aceitamos diversos convênios. Entre em contato para verificar a cobertura do seu plano." },
               { q: "Como funciona o resgate?", a: "Possuímos uma equipe especializada em remoção 24 horas, com ambulância e profissionais treinados para realizar o transporte com segurança e dignidade." },
               { q: "A família pode visitar?", a: "Sim. Acreditamos que a família é fundamental na recuperação. As visitas ocorrem de acordo com a evolução terapêutica do paciente." },
-              { q: "Qual o tempo de tratamento?", a: "O tempo varia caso a caso, mas geralmente o ciclo completo de desintoxicação e reabilitação dura entre 3 a 6 meses." }
+              { q: "A doença tem cura?", a: "A dependência química é uma doença incurável, progressiva e fatal, mas tratável. Nosso objetivo é estacionar a doença e proporcionar qualidade de vida através da conscientização e manutenção contínua." }
             ].map((item, idx) => (
               <AccordionItem 
                 key={idx} 
@@ -386,7 +588,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 6️⃣ CONTATO MELHORADO */}
+      {/* 🔟 CONTATO MELHORADO */}
       <Section id="contato" className="bg-blue-900 text-white">
         <div className="container mx-auto max-w-5xl">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
@@ -432,8 +634,13 @@ export default function App() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Mensagem (Opcional)</label>
-                  <textarea rows="3" className="w-full p-3 bg-slate-50 rounded-lg border border-slate-200 focus:ring-2 focus:ring-teal-500 outline-none" placeholder="Como podemos ajudar?"></textarea>
+                   <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Motivo</label>
+                   <select className="w-full p-3 bg-slate-50 rounded-lg border border-slate-200 focus:ring-2 focus:ring-teal-500 outline-none">
+                      <option>Internação para Drogas</option>
+                      <option>Internação para Álcool</option>
+                      <option>Vício em Jogos</option>
+                      <option>Outros</option>
+                   </select>
                 </div>
                 <Button variant="primary" className="w-full py-4 text-lg">
                   Enviar Pedido de Ajuda
