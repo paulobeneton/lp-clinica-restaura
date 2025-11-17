@@ -16,9 +16,8 @@ const GlobalStyles = () => (
     h1, h2, h3, h4, h5, h6 { font-family: 'Funnel Display', sans-serif; }
     
     .glass-panel {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.5);
     }
   `}</style>
 );
@@ -36,14 +35,14 @@ const galleryImages = [
 // --- COMPONENTES UI ---
 
 const Button = ({ children, variant = 'primary', className = '', onClick, ...props }) => {
-  const baseStyle = "px-8 py-4 rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-sm tracking-wide";
+  const baseStyle = "px-8 py-3.5 rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-sm tracking-wide";
   
   const variants = {
     primary: "bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-700 text-white shadow-orange-500/25 transform hover:-translate-y-0.5", 
     secondary: "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20",
     outline: "border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm",
     ghost: "text-slate-600 hover:text-teal-700 hover:bg-teal-50 font-semibold shadow-none rounded-lg px-4",
-    whatsapp: "bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-green-500/20"
+    headerCall: "bg-teal-600 hover:bg-teal-700 text-white shadow-teal-600/20 px-6 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transform hover:-translate-y-0.5"
   };
   
   return (
@@ -58,7 +57,6 @@ const Section = ({ children, className = '', id = '', bg = 'white' }) => {
     white: 'bg-white',
     gray: 'bg-slate-50',
     dark: 'bg-slate-900 text-white',
-    gradient: 'bg-gradient-to-b from-slate-50 to-white'
   };
 
   return (
@@ -73,7 +71,7 @@ const FadeIn = ({ children, delay = 0 }) => (
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-60px" }}
-    transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }} // Easing mais sofisticado
+    transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
   >
     {children}
   </motion.div>
@@ -83,7 +81,7 @@ const FadeIn = ({ children, delay = 0 }) => (
 const GalleryCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxImage, setLightboxImage] = useState(null);
-  const visibleItems = 3; // Quantos itens aparecem na tela (desktop)
+  const visibleItems = 3; 
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % (galleryImages.length - visibleItems + 1));
@@ -94,7 +92,7 @@ const GalleryCarousel = () => {
   };
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-8 group">
+    <div className="relative w-full max-w-7xl mx-auto px-4 md:px-8 group">
       {/* Lightbox */}
       <AnimatePresence>
         {lightboxImage && (
@@ -131,7 +129,7 @@ const GalleryCarousel = () => {
         </motion.div>
       </div>
 
-      {/* Setas de Navegação (Só aparecem no Hover da seção) */}
+      {/* Setas de Navegação */}
       <button 
         onClick={prevSlide} 
         disabled={currentIndex === 0}
@@ -188,11 +186,12 @@ export default function App() {
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
       
-      {/* HEADER GLASSMORPHISM */}
-      <nav className="fixed top-0 w-full z-50 glass-panel border-b-0 shadow-sm transition-all duration-300">
+      {/* HEADER - BRANCO E REDESENHADO */}
+      <nav className="fixed top-0 w-full z-50 bg-white border-b border-slate-100 shadow-sm transition-all duration-300">
         <div className="container mx-auto px-6 h-24 flex justify-between items-center">
+          {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-br from-teal-500 to-teal-700 p-2.5 rounded-xl shadow-lg shadow-teal-500/20">
+            <div className="bg-teal-600 p-2.5 rounded-xl shadow-lg shadow-teal-600/20">
               <Heart className="text-white h-6 w-6" strokeWidth={2} />
             </div>
             <div className="leading-tight">
@@ -201,17 +200,18 @@ export default function App() {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-1">
-            <Button variant="ghost" onClick={() => document.getElementById('tratamento').scrollIntoView()}>Tratamento</Button>
-            <Button variant="ghost" onClick={() => document.getElementById('galeria').scrollIntoView()}>Estrutura</Button>
-            <Button variant="ghost" onClick={() => document.getElementById('unidades').scrollIntoView()}>Unidades</Button>
+          {/* Menu Desktop */}
+          <div className="hidden md:flex items-center gap-2">
+            <a href="#tratamento" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Tratamento</a>
+            <a href="#galeria" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Estrutura</a>
+            <a href="#unidades" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Unidades</a>
             
-            <div className="ml-6 pl-6 border-l border-slate-200 flex items-center gap-4">
+            <div className="ml-6 pl-6 border-l border-slate-200 flex items-center gap-6">
                <div className="text-right hidden lg:block">
-                 <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Emergência 24h</span>
-                 <a href="tel:08001234567" className="text-lg font-bold text-slate-900 hover:text-teal-600 transition">0800 123 4567</a>
+                 <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
+                 <a href="tel:08001234567" className="text-lg font-bold text-slate-900 hover:text-teal-600 transition font-mono">0800 123 4567</a>
                </div>
-               <Button variant="primary" onClick={handleCall} className="px-6 py-3">Ligar Agora</Button>
+               <Button variant="headerCall" onClick={handleCall}>LIGAR AGORA</Button>
             </div>
           </div>
 
@@ -219,6 +219,23 @@ export default function App() {
             {isMenuOpen ? <X strokeWidth={1.5} /> : <Menu strokeWidth={1.5} />}
           </button>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="md:hidden bg-white border-t border-slate-100 p-4 flex flex-col gap-3 shadow-xl absolute w-full"
+            >
+              <a href="#tratamento" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Tratamento</a>
+              <a href="#galeria" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Estrutura</a>
+              <a href="#unidades" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Unidades</a>
+              <Button variant="headerCall" onClick={handleCall} className="w-full mt-2">LIGAR AGORA</Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* 1️⃣ HERO SECTION */}
@@ -229,7 +246,6 @@ export default function App() {
             alt="Background" 
             className="w-full h-full object-cover opacity-30"
           />
-          {/* Gradiente refinado */}
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent"></div>
         </div>
 
@@ -288,29 +304,29 @@ export default function App() {
         </div>
       </div>
 
-      {/* 2️⃣ ESPECIALISTAS EM RECUPERAÇÃO (CARDS) */}
-      <Section bg="gradient">
+      {/* 2️⃣ ESPECIALISTAS EM RECUPERAÇÃO (CARDS BRANCOS, FUNDO CINZA, CONTORNO) */}
+      <Section bg="gray">
         <div className="container mx-auto">
-           <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold text-slate-900">Especialistas em Recuperação</h3>
-              <p className="text-slate-500 mt-2 font-light">Tratamentos específicos para cada necessidade</p>
+           <div className="text-center mb-16">
+              <h3 className="text-4xl font-bold text-slate-900">Especialistas em Recuperação</h3>
+              <p className="text-slate-500 mt-2 font-light text-lg">Tratamentos específicos para cada necessidade</p>
            </div>
            
            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {[
-                { name: "Álcool", icon: <Wine size={32} className="text-purple-500" />, color: "hover:border-purple-200 hover:bg-purple-50" },
-                { name: "Drogas", icon: <Leaf size={32} className="text-green-500" />, color: "hover:border-green-200 hover:bg-green-50" },
-                { name: "Medicamentos", icon: <Pill size={32} className="text-blue-500" />, color: "hover:border-blue-200 hover:bg-blue-50" },
-                { name: "Jogos (Bets)", icon: <Coins size={32} className="text-yellow-500" />, color: "hover:border-yellow-200 hover:bg-yellow-50" },
-                { name: "Outros Vícios", icon: <AlertTriangle size={32} className="text-red-500" />, color: "hover:border-red-200 hover:bg-red-50" },
+                { name: "Álcool", icon: <Wine size={32} className="text-purple-600" />, hoverBorder: "hover:border-purple-300", hoverShadow: "hover:shadow-purple-100" },
+                { name: "Drogas", icon: <Leaf size={32} className="text-green-600" />, hoverBorder: "hover:border-green-300", hoverShadow: "hover:shadow-green-100" },
+                { name: "Medicamentos", icon: <Pill size={32} className="text-blue-600" />, hoverBorder: "hover:border-blue-300", hoverShadow: "hover:shadow-blue-100" },
+                { name: "Jogos (Bets)", icon: <Coins size={32} className="text-yellow-500" />, hoverBorder: "hover:border-yellow-300", hoverShadow: "hover:shadow-yellow-100" },
+                { name: "Outros Vícios", icon: <AlertTriangle size={32} className="text-red-500" />, hoverBorder: "hover:border-red-300", hoverShadow: "hover:shadow-red-100" },
               ].map((item, i) => (
                 <motion.div 
                   key={i} 
-                  whileHover={{ y: -8 }}
-                  className={`bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center gap-4 cursor-default transition-all duration-300 ${item.color}`}
+                  whileHover={{ y: -5 }}
+                  className={`bg-white p-8 rounded-2xl border border-slate-200 flex flex-col items-center justify-center gap-4 cursor-default transition-all duration-300 shadow-sm ${item.hoverBorder} hover:shadow-xl ${item.hoverShadow}`}
                 >
-                  <div className="p-4 bg-white rounded-full shadow-sm border border-slate-50">{item.icon}</div>
-                  <span className="font-semibold text-slate-700 text-base">{item.name}</span>
+                  <div className="p-4 bg-slate-50 rounded-full">{item.icon}</div>
+                  <span className="font-bold text-slate-800 text-lg">{item.name}</span>
                 </motion.div>
               ))}
            </div>
@@ -386,7 +402,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 5️⃣ GALERIA CARROSSEL (NOVA) */}
+      {/* 5️⃣ GALERIA CARROSSEL */}
       <Section id="galeria" className="bg-slate-50">
          <div className="container mx-auto text-center mb-16">
            <h2 className="text-4xl font-bold text-slate-900">Nossa Estrutura</h2>
@@ -395,60 +411,83 @@ export default function App() {
          <GalleryCarousel />
       </Section>
 
-      {/* 6️⃣ EXCELÊNCIA NO CUIDADO (INVERTIDA) */}
+      {/* 6️⃣ EXCELÊNCIA NO CUIDADO (EM BLOCOS SEPARADOS E VALORIZADOS) */}
       <Section id="equipe" bg="white">
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+           <div className="text-center mb-20">
+            <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Alto Padrão</span>
+            <h2 className="text-4xl font-bold text-slate-900 mt-3 mb-4">Excelência no Cuidado</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
+            {/* Bloco 1: Equipe */}
             <FadeIn delay={0.1}>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4 mb-2 text-teal-600">
-                  <div className="p-3 bg-teal-50 rounded-xl"><Stethoscope size={32} strokeWidth={1.5} /></div>
-                  <h3 className="text-2xl font-bold text-slate-900">Equipe Técnica</h3>
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+                <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-600 transition-colors duration-300">
+                   <Stethoscope size={32} className="text-teal-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
                 </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Equipe Técnica</h3>
                 <ul className="space-y-4">
-                  {["Psiquiatra", "Psicóloga", "Enfermeira Padrão", "Terapeutas (24 Horas)", "Coordenadores (24 Horas)"].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-slate-600 border-b border-slate-100 pb-3 last:border-0">
-                      <CheckCircle2 size={18} className="text-teal-500" /> {item}
+                  {["Psiquiatra", "Psicóloga", "Enfermeira Padrão", "Terapeutas 24h", "Coordenadores"].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-slate-600 font-medium">
+                      <div className="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center text-teal-600">
+                         <CheckCircle2 size={14} />
+                      </div>
+                      {item}
                     </li>
                   ))}
                 </ul>
               </div>
             </FadeIn>
 
+            {/* Bloco 2: Terapias */}
             <FadeIn delay={0.2}>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4 mb-2 text-orange-500">
-                  <div className="p-3 bg-orange-50 rounded-xl"><Brain size={32} strokeWidth={1.5} /></div>
-                  <h3 className="text-2xl font-bold text-slate-900">Terapias</h3>
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+                <div className="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-orange-500 transition-colors duration-300">
+                   <Brain size={32} className="text-orange-500 group-hover:text-white transition-colors" strokeWidth={1.5} />
                 </div>
-                <div className="space-y-6">
-                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <strong className="text-slate-900 block mb-1">P.P.R (Prevenção a Recaída)</strong>
-                    <span className="text-slate-500 text-sm font-light">Ferramentas práticas para a vida pós-internação.</span>
+                <h3 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Terapias</h3>
+                <div className="space-y-5">
+                  <div>
+                     <strong className="text-slate-900 block mb-1 text-lg">P.P.R</strong>
+                     <span className="text-slate-500 text-sm font-light block">Prevenção a Recaída e ferramentas para a vida.</span>
                   </div>
-                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <strong className="text-slate-900 block mb-1">T.R.E (Racional Emotiva)</strong>
-                    <span className="text-slate-500 text-sm font-light">Aprender a lidar com sentimentos difíceis.</span>
+                  <div>
+                     <strong className="text-slate-900 block mb-1 text-lg">T.R.E</strong>
+                     <span className="text-slate-500 text-sm font-light block">Terapia Racional Emotiva e sentimentos.</span>
+                  </div>
+                  <div>
+                     <strong className="text-slate-900 block mb-1 text-lg">Laborterapia</strong>
+                     <span className="text-slate-500 text-sm font-light block">Disciplina e resgate da autoestima.</span>
                   </div>
                 </div>
               </div>
             </FadeIn>
 
+            {/* Bloco 3: Rotina */}
             <FadeIn delay={0.3}>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4 mb-2 text-green-600">
-                  <div className="p-3 bg-green-50 rounded-xl"><Utensils size={32} strokeWidth={1.5} /></div>
-                  <h3 className="text-2xl font-bold text-slate-900">Rotina</h3>
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+                <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-green-600 transition-colors duration-300">
+                   <Utensils size={32} className="text-green-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
                 </div>
-                <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                  <h4 className="font-bold text-slate-900 text-sm mb-4 uppercase tracking-wider">4 Refeições Balanceadas</h4>
-                  <div className="grid grid-cols-2 gap-3 text-sm text-slate-600">
-                    <span className="bg-white px-3 py-2 rounded shadow-sm">Café da Manhã</span>
-                    <span className="bg-white px-3 py-2 rounded shadow-sm">Almoço</span>
-                    <span className="bg-white px-3 py-2 rounded shadow-sm">Café da Tarde</span>
-                    <span className="bg-white px-3 py-2 rounded shadow-sm">Jantar</span>
+                <h3 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Rotina Diária</h3>
+                <div className="mb-8">
+                  <h4 className="font-bold text-slate-700 text-sm mb-3 uppercase tracking-wider">Alimentação Balanceada</h4>
+                  <div className="grid grid-cols-2 gap-2 text-xs font-medium text-slate-600">
+                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Café da Manhã</span>
+                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Almoço</span>
+                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Café da Tarde</span>
+                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Jantar</span>
                   </div>
+                </div>
+                <div>
+                   <h4 className="font-bold text-slate-700 text-sm mb-3 uppercase tracking-wider">Atividades</h4>
+                   <div className="flex flex-wrap gap-2">
+                      <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Espiritualidade</span>
+                      <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Educação Física</span>
+                      <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Reuniões N.A.</span>
+                   </div>
                 </div>
               </div>
             </FadeIn>
@@ -515,7 +554,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 9️⃣ CONTATO MELHORADO (RESTAURADO PARA LAYOUT SPLIT) */}
+      {/* 9️⃣ CONTATO MELHORADO (SPLIT) */}
       <Section id="contato" className="bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="bg-slate-900 rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
@@ -590,32 +629,6 @@ export default function App() {
               </form>
             </div>
 
-          </div>
-        </div>
-      </Section>
-
-      {/* 🔟 PERGUNTAS FREQUENTES (FAQ) */}
-      <Section id="faq" bg="gray">
-        <div className="container mx-auto max-w-3xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900">Dúvidas Frequentes</h2>
-          </div>
-
-          <div className="space-y-4">
-            {[
-              { q: "Vocês aceitam plano de saúde?", a: "Sim, trabalhamos com reembolso assistido e aceitamos diversos convênios. Entre em contato para verificar a cobertura do seu plano." },
-              { q: "Como funciona o resgate?", a: "Possuímos uma equipe especializada em remoção 24 horas, com ambulância e profissionais treinados para realizar o transporte com segurança e dignidade." },
-              { q: "A família pode visitar?", a: "Sim. Acreditamos que a família é fundamental na recuperação. As visitas ocorrem de acordo com a evolução terapêutica do paciente." },
-              { q: "A doença tem cura?", a: "A dependência química é uma doença incurável, progressiva e fatal, mas tratável. Nosso objetivo é estacionar a doença e proporcionar qualidade de vida." }
-            ].map((item, idx) => (
-              <AccordionItem 
-                key={idx} 
-                question={item.q} 
-                answer={item.a} 
-                isOpen={openFaq === idx} 
-                onClick={() => setOpenFaq(openFaq === idx ? null : idx)} 
-              />
-            ))}
           </div>
         </div>
       </Section>
