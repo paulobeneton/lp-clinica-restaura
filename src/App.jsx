@@ -4,7 +4,7 @@ import {
   Phone, MapPin, Clock, Heart, ShieldCheck, 
   Activity, Users, ArrowRight, CheckCircle2, Menu, X, Star,
   MessageCircle, ChevronDown, ChevronLeft, ChevronRight, Home, Lock, Stethoscope, 
-  Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, Search, ZoomIn
+  Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, ZoomIn, Calendar
 } from 'lucide-react';
 
 // --- CONFIGURAÇÃO GLOBAL & FONTES ---
@@ -16,8 +16,9 @@ const GlobalStyles = () => (
     h1, h2, h3, h4, h5, h6 { font-family: 'Funnel Display', sans-serif; }
     
     .glass-panel {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
   `}</style>
 );
@@ -41,6 +42,7 @@ const Button = ({ children, variant = 'primary', className = '', onClick, ...pro
     primary: "bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-700 text-white shadow-orange-500/25 transform hover:-translate-y-0.5", 
     secondary: "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20",
     outline: "border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm",
+    outlineDark: "border border-slate-700 text-slate-300 hover:border-white hover:text-white hover:bg-white/5",
     ghost: "text-slate-600 hover:text-teal-700 hover:bg-teal-50 font-semibold shadow-none rounded-lg px-4",
     headerCall: "bg-teal-600 hover:bg-teal-700 text-white shadow-teal-600/20 px-6 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transform hover:-translate-y-0.5"
   };
@@ -186,7 +188,7 @@ export default function App() {
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
       
-      {/* HEADER - BRANCO E REDESENHADO */}
+      {/* HEADER - BRANCO E CLEAN */}
       <nav className="fixed top-0 w-full z-50 bg-white border-b border-slate-100 shadow-sm transition-all duration-300">
         <div className="container mx-auto px-6 h-24 flex justify-between items-center">
           {/* Logo */}
@@ -203,8 +205,8 @@ export default function App() {
           {/* Menu Desktop */}
           <div className="hidden md:flex items-center gap-2">
             <a href="#tratamento" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Tratamento</a>
-            <a href="#galeria" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Estrutura</a>
             <a href="#unidades" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Unidades</a>
+            <a href="#galeria" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Estrutura</a>
             
             <div className="ml-6 pl-6 border-l border-slate-200 flex items-center gap-6">
                <div className="text-right hidden lg:block">
@@ -230,8 +232,8 @@ export default function App() {
               className="md:hidden bg-white border-t border-slate-100 p-4 flex flex-col gap-3 shadow-xl absolute w-full"
             >
               <a href="#tratamento" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Tratamento</a>
-              <a href="#galeria" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Estrutura</a>
               <a href="#unidades" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Unidades</a>
+              <a href="#galeria" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Estrutura</a>
               <Button variant="headerCall" onClick={handleCall} className="w-full mt-2">LIGAR AGORA</Button>
             </motion.div>
           )}
@@ -304,12 +306,15 @@ export default function App() {
         </div>
       </div>
 
-      {/* 2️⃣ ESPECIALISTAS EM RECUPERAÇÃO (CARDS BRANCOS, FUNDO CINZA, CONTORNO) */}
+      {/* 2️⃣ ESPECIALISTAS EM RECUPERAÇÃO (Cards com Destaque e Texto de Copy) */}
       <Section bg="gray">
         <div className="container mx-auto">
-           <div className="text-center mb-16">
-              <h3 className="text-4xl font-bold text-slate-900">Especialistas em Recuperação</h3>
-              <p className="text-slate-500 mt-2 font-light text-lg">Tratamentos específicos para cada necessidade</p>
+           <div className="text-center mb-12 max-w-3xl mx-auto">
+              <h3 className="text-4xl font-bold text-slate-900 mb-4">Especialistas em Recuperação</h3>
+              <p className="text-slate-500 text-lg font-light leading-relaxed">
+                Nossa equipe multidisciplinar desenvolveu protocolos específicos para cada tipo de dependência. 
+                Entendemos que cada substância age de forma diferente no organismo e, por isso, o tratamento precisa ser direcionado.
+              </p>
            </div>
            
            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -360,7 +365,7 @@ export default function App() {
         </FadeIn>
       </Section>
 
-      {/* 4️⃣ JORNADA DE TRATAMENTO */}
+      {/* 4️⃣ JORNADA DE TRATAMENTO (BOXES ALINHADOS) */}
       <Section id="tratamento" bg="gray">
         <div className="container mx-auto">
           <div className="text-center mb-20">
@@ -368,12 +373,12 @@ export default function App() {
             <h2 className="text-4xl font-bold text-slate-900 mt-3 mb-4">Plano de Tratamento</h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 relative">
+          <div className="grid md:grid-cols-3 gap-8 relative items-stretch">
              {/* Linha Conectora */}
              <div className="hidden md:block absolute top-10 left-0 w-full h-0.5 bg-slate-200 -z-10"></div>
 
             <FadeIn delay={0.1}>
-              <div className="bg-white p-10 rounded-3xl border border-slate-100 h-full hover:shadow-xl transition-all duration-500 relative group">
+              <div className="bg-white p-10 rounded-3xl border border-slate-200 h-full hover:shadow-xl transition-all duration-500 relative group">
                 <div className="bg-orange-500 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 text-white font-bold text-3xl shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform">1</div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Desintoxicação</h3>
                 <span className="text-xs font-bold text-orange-500 uppercase tracking-wider mb-6 block">1º e 2º Mês</span>
@@ -382,7 +387,7 @@ export default function App() {
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <div className="bg-white p-10 rounded-3xl border border-slate-100 h-full hover:shadow-xl transition-all duration-500 relative group md:-translate-y-8">
+              <div className="bg-white p-10 rounded-3xl border border-slate-200 h-full hover:shadow-xl transition-all duration-500 relative group">
                 <div className="bg-teal-600 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 text-white font-bold text-3xl shadow-lg shadow-teal-600/30 group-hover:scale-110 transition-transform">2</div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Conscientização</h3>
                 <span className="text-xs font-bold text-teal-600 uppercase tracking-wider mb-6 block">3º e 4º Mês</span>
@@ -391,7 +396,7 @@ export default function App() {
             </FadeIn>
 
             <FadeIn delay={0.3}>
-              <div className="bg-white p-10 rounded-3xl border border-slate-100 h-full hover:shadow-xl transition-all duration-500 relative group">
+              <div className="bg-white p-10 rounded-3xl border border-slate-200 h-full hover:shadow-xl transition-all duration-500 relative group">
                 <div className="bg-blue-600 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 text-white font-bold text-3xl shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform">3</div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Ressocialização</h3>
                 <span className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-6 block">5º e 6º Mês</span>
@@ -411,19 +416,88 @@ export default function App() {
          <GalleryCarousel />
       </Section>
 
-      {/* 6️⃣ EXCELÊNCIA NO CUIDADO (EM BLOCOS SEPARADOS E VALORIZADOS) */}
-      <Section id="equipe" bg="white">
+      {/* 6️⃣ UNIDADES (RESTAURADA e PREMIUM) */}
+      <Section id="unidades" className="bg-white">
+         <div className="container mx-auto">
+           <div className="text-center mb-16">
+             <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Presença Nacional</span>
+             <h2 className="text-4xl font-bold text-slate-900 mt-2">Nossas Unidades</h2>
+           </div>
+
+           <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { 
+                  title: "Unidade São Paulo - Centro",
+                  img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800", 
+                  address: "Rua das Flores, 123 - Centro, São Paulo - SP",
+                  phone: "(11) 98765-4321"
+                },
+                { 
+                  title: "Unidade Rio de Janeiro - Zona Sul",
+                  img: "https://images.unsplash.com/photo-1600596542815-60002555619f?q=80&w=800", 
+                  address: "Av. Atlântica, 456 - Copacabana, Rio de Janeiro - RJ",
+                  phone: "(21) 98765-1234"
+                },
+                { 
+                  title: "Unidade Belo Horizonte - Savassi",
+                  img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800", 
+                  address: "Rua da Bahia, 789 - Savassi, Belo Horizonte - MG",
+                  phone: "(31) 98765-5678"
+                }
+              ].map((unit, i) => (
+                <FadeIn key={i} delay={i * 0.1}>
+                  <div className="bg-slate-900 rounded-2xl overflow-hidden shadow-2xl group h-full flex flex-col">
+                     <div className="h-56 overflow-hidden relative">
+                        <img src={unit.img} alt={unit.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                     </div>
+                     <div className="p-8 flex flex-col flex-grow">
+                        <h3 className="text-xl font-bold text-white mb-6">{unit.title}</h3>
+                        
+                        <div className="space-y-4 text-slate-300 text-sm mb-8 flex-grow">
+                          <div className="flex gap-3">
+                             <MapPin className="text-teal-500 shrink-0" size={18} />
+                             <span>{unit.address}</span>
+                          </div>
+                          <div className="flex gap-3">
+                             <Phone className="text-teal-500 shrink-0" size={18} />
+                             <span>{unit.phone}</span>
+                          </div>
+                          <div className="flex gap-3">
+                             <Clock className="text-teal-500 shrink-0" size={18} />
+                             <span>24 horas - Todos os dias</span>
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <button onClick={handleCall} className="flex items-center justify-center gap-2 w-full text-white font-medium py-2 hover:text-teal-400 transition">
+                             <Phone size={16} /> Ligar Agora
+                          </button>
+                          <Button variant="outline" onClick={scrollToForm} className="w-full py-3 text-sm">
+                             Agendar Visita <ArrowRight size={16} className="ml-1" />
+                          </Button>
+                        </div>
+                     </div>
+                  </div>
+                </FadeIn>
+              ))}
+           </div>
+         </div>
+      </Section>
+
+      {/* 7️⃣ EXCELÊNCIA NO CUIDADO (EM BLOCOS) */}
+      <Section id="excelencia" bg="gray">
         <div className="container mx-auto">
-           <div className="text-center mb-20">
-            <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Alto Padrão</span>
-            <h2 className="text-4xl font-bold text-slate-900 mt-3 mb-4">Excelência no Cuidado</h2>
+          <div className="text-center mb-16">
+             <h2 className="text-4xl font-bold text-slate-900">Excelência no Cuidado</h2>
+             <p className="text-slate-500 mt-2">Padrão ouro em reabilitação</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            {/* Bloco 1: Equipe */}
+            {/* Bloco Equipe Técnica */}
             <FadeIn delay={0.1}>
-              <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+              <div className="bg-white p-10 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
                 <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-600 transition-colors duration-300">
                    <Stethoscope size={32} className="text-teal-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
                 </div>
@@ -441,7 +515,7 @@ export default function App() {
               </div>
             </FadeIn>
 
-            {/* Bloco 2: Terapias */}
+            {/* Bloco Terapias */}
             <FadeIn delay={0.2}>
               <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
                 <div className="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-orange-500 transition-colors duration-300">
@@ -465,7 +539,7 @@ export default function App() {
               </div>
             </FadeIn>
 
-            {/* Bloco 3: Rotina */}
+            {/* Bloco Rotina */}
             <FadeIn delay={0.3}>
               <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
                 <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-green-600 transition-colors duration-300">
@@ -496,8 +570,8 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 7️⃣ POR QUE NOS ESCOLHER */}
-      <Section id="diferenciais" bg="gray">
+      {/* 8️⃣ POR QUE NOS ESCOLHER */}
+      <Section id="diferenciais" bg="white">
         <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">Por Que Nos Escolher</h2>
@@ -514,7 +588,7 @@ export default function App() {
               { icon: <ShieldCheck size={28} />, title: "Equipe Experiente", desc: "Profissionais com +10 anos de experiência." },
             ].map((item, idx) => (
               <FadeIn key={idx} delay={idx * 0.1}>
-                <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 group">
+                <div className="bg-slate-50 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 group">
                     <div className="w-14 h-14 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                       {React.cloneElement(item.icon, { strokeWidth: 1.5 })}
                     </div>
@@ -527,8 +601,8 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 8️⃣ DEPOIMENTOS */}
-      <Section id="depoimentos" bg="white">
+      {/* 9️⃣ DEPOIMENTOS */}
+      <Section id="depoimentos" bg="gray">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl font-bold text-slate-900 mb-16">Histórias de Transformação</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -538,7 +612,7 @@ export default function App() {
               { text: "Internar meu filho foi difícil, mas foi a melhor decisão. Hoje ele é outra pessoa, cheio de vida.", author: "Maria Helena", role: "Mãe" }
             ].map((depo, idx) => (
               <FadeIn key={idx} delay={idx * 0.1}>
-                <div className="bg-slate-50 p-10 rounded-t-3xl rounded-br-3xl rounded-bl-none border border-slate-100 text-left hover:shadow-lg transition relative h-full flex flex-col">
+                <div className="bg-white p-10 rounded-t-3xl rounded-br-3xl rounded-bl-none border border-slate-100 text-left hover:shadow-lg transition relative h-full flex flex-col">
                   <div className="flex gap-1 mb-6 text-orange-400">
                     {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
                   </div>
@@ -554,7 +628,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 9️⃣ CONTATO MELHORADO (SPLIT) */}
+      {/* 🔟 CONTATO MELHORADO (SPLIT) */}
       <Section id="contato" className="bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="bg-slate-900 rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
@@ -645,7 +719,7 @@ export default function App() {
       </footer>
 
       {/* Botão Flutuante WhatsApp */}
-      <a href="https://wa.me/5511999999999" target="_blank" className="fixed bottom-6 right-6 z-50 hover:-translate-y-1 transition-transform">
+      <a href="https://wa.me/5535999726322" target="_blank" className="fixed bottom-6 right-6 z-50 hover:-translate-y-1 transition-transform">
         <div className="bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full shadow-2xl shadow-green-500/30 flex items-center justify-center">
           <MessageCircle size={32} fill="currentColor" />
         </div>
