@@ -191,6 +191,18 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => (
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+
+  // Estados do Formulário
+  const [formData, setFormData] = useState({ name: '', phone: '', subject: 'Internação para Drogas' });
+  const [isSending, setIsSending] = useState(false);
+
+  // Configurações
+  const phoneNumber = "5535999726322"; // Telefone do Evandro
+  const displayPhone = "(35) 99972-6322";
+  
+  // ⚠️ COLOQUE AQUI O LINK DO SEU WEBHOOK (n8n, Typebot, etc)
+  // Se não tiver, deixe as aspas vazias "" que ele vai direto pro WhatsApp
+  const WEBHOOK_URL = "";
   
   // TELEFONE PRINCIPAL (EVANDRO)
   const phoneNumber = "5535999726322";
@@ -199,7 +211,47 @@ export default function App() {
   const scrollToForm = () => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
   const handleWhatsApp = (text = '') => window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
   const handleCall = () => window.open(`tel:${phoneNumber}`, '_self');
+  
+  // --- COLE ISSO ANTES DO 'return (' ---
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSending(true);
+
+    // Mensagem formatada para o WhatsApp
+    const whatsappText = `Olá, me chamo *${formData.name}*. Gostaria de informações sobre *${formData.subject}*. Meu telefone é ${formData.phone}.`;
+
+    try {
+      // 1. Envia para o Webhook (se configurado)
+      if (WEBHOOK_URL) {
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ 
+            ...formData, 
+            date: new Date().toLocaleString('pt-BR'),
+            origin: 'Landing Page'
+          })
+        }).catch(err => console.error("Erro silencioso no Webhook:", err));
+      }
+
+      // 2. Pequeno delay para dar feedback visual ao usuário
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+    } catch (error) {
+      console.error("Erro no processo:", error);
+    } finally {
+      // 3. SEMPRE redireciona para o WhatsApp no final
+      setIsSending(false);
+      handleWhatsApp(whatsappText);
+      setFormData({ name: '', phone: '', subject: 'Internação para Drogas' });
+    }
+  };
+  
   return (
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
@@ -704,31 +756,62 @@ export default function App() {
 
             {/* Lado Direito (Formulário) */}
             <div className="lg:w-7/12 p-12 bg-white">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">Solicite uma Ligação</h3>
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">Entre em contato</h3>
               <p className="text-slate-500 mb-8 font-light">Preencha os dados abaixo e ligamos para você em instantes.</p>
               
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+              {/* --- SUBSTITUA O <form> ANTIGO POR ESTE --- */}
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Nome</label>
-                    <input type="text" className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" placeholder="Seu nome" />
+                    <input 
+                      type="text" 
+                      name="name" 
+                      value={formData.name} 
+                      onChange={handleChange} 
+                      className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" 
+                      placeholder="Seu nome" 
+                      required 
+                    />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Telefone</label>
-                    <input type="tel" className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" placeholder="(DDD) 99999-9999" />
+                    <input 
+                      type="tel" 
+                      name="phone" 
+                      value={formData.phone} 
+                      onChange={handleChange} 
+                      className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" 
+                      placeholder="(DDD) 99999-9999" 
+                      required 
+                    />
                   </div>
                 </div>
                 <div>
                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Como podemos ajudar?</label>
-                   <select className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition text-slate-600">
+                   <select 
+                      name="subject" 
+                      value={formData.subject} 
+                      onChange={handleChange} 
+                      className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition text-slate-600"
+                   >
                       <option>Internação para Drogas</option>
                       <option>Internação para Álcool</option>
                       <option>Vício em Jogos</option>
                       <option>Outros</option>
                    </select>
                 </div>
-                <Button variant="whatsapp" className="w-full py-5 text-lg shadow-xl shadow-green-500/20 flex justify-center items-center gap-3">
-                   <WhatsAppIcon className="w-6 h-6" /> CHAMAR NO WHATSAPP
+                
+                <Button 
+                  variant="whatsapp" 
+                  className="w-full py-5 text-lg shadow-xl shadow-green-500/20 flex justify-center items-center gap-3 disabled:opacity-70 disabled:cursor-wait"
+                  disabled={isSending}
+                >
+                   {isSending ? (
+                     <>Enviando...</>
+                   ) : (
+                     <><WhatsAppIcon className="w-6 h-6" /> SOLICITAR AJUDA AGORA</>
+                   )}
                 </Button>
               </form>
             </div>
@@ -759,4 +842,5 @@ export default function App() {
     </div>
   );
 }
+
 
