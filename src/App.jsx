@@ -581,12 +581,12 @@ export default function App() {
                           </div>
                         </div>
 
-                        <div className="space-y-3">
+                          <div className="space-y-3">
                           <button onClick={handleCall} className="flex items-center justify-center gap-2 w-full text-white font-medium py-2 hover:text-teal-400 transition">
                              <Phone size={16} /> Ligar Agora
                           </button>
-                          <Button variant="outline" onClick={scrollToForm} className="w-full py-3 text-sm">
-                             Agendar Visita <ArrowRight size={16} className="ml-1" />
+                          <Button variant="whatsapp" onClick={() => handleWhatsApp()} className="w-full py-3 text-sm flex justify-center gap-2 shadow-none">
+                             <WhatsAppIcon className="w-5 h-5" /> Falar no WhatsApp
                           </Button>
                         </div>
                      </div>
@@ -756,6 +756,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
