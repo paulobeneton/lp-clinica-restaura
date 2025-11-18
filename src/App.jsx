@@ -7,7 +7,7 @@ import {
   Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, ZoomIn
 } from 'lucide-react';
 
-// --- ÍCONE WHATSAPP OFICIAL (Vetorizado) ---
+// --- ÍCONE WHATSAPP OFICIAL (Vetorizado) ---web
 const WhatsAppIcon = ({ className }) => (
   <svg 
     viewBox="0 0 24 24" 
@@ -202,7 +202,7 @@ export default function App() {
   const displayPhone = "(35) 99972-6322";
   
   // ⚠️ INSIRA SEU WEBHOOK AQUI (Se não tiver, deixe vazio "")
-  const WEBHOOK_URL = ""; 
+  const WEBHOOK_URL = "https://n8n.agsup.click/webhook-test/clinica-recuperacao"; 
 
   const scrollToForm = () => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
   
@@ -823,3 +823,4 @@ export default function App() {
     </div>
   );
 }
+
