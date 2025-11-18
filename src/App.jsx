@@ -313,7 +313,7 @@ export default function App() {
               <FadeIn delay={0.2}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-slate-800">
                   <img 
-                    src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=2070&auto=format&fit=crop" 
+                    src="https://cdn.agsup.com.br/grv/imagem-clinica.jpeg?q=80&w=2070&auto=format&fit=crop" 
                     alt="Acolhimento e Paz" 
                     className="w-full h-[450px] object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
@@ -756,3 +756,4 @@ export default function App() {
     </div>
   );
 }
+
