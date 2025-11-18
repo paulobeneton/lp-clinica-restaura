@@ -37,12 +37,21 @@ const GlobalStyles = () => (
 
 // --- DADOS DA GALERIA ---
 const galleryImages = [
-  { src: "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?q=80&w=800", title: "Piscina & Lazer" },
-  { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800", title: "Suítes Confortáveis" },
-  { src: "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800", title: "Consultórios" },
-  { src: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800", title: "Área de Convivência" },
-  { src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800", title: "Jardins" },
-  { src: "https://images.unsplash.com/photo-1505693416388-b0346d6771b4?q=80&w=800", title: "Auditório" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-01.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-02.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-03.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-04.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-05.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-06.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-07.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-08.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-09.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-10.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-11.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-12.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-13.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-14.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-15.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
 ];
 
 // --- COMPONENTES UI ---
@@ -867,6 +876,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
