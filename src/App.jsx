@@ -588,7 +588,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 7️⃣ UNIDADES */}
+      {/* 7️⃣ UNIDADES (ATUALIZADA: 2 UNIDADES) */}
       <Section id="unidades" className="bg-white border-t border-slate-100">
          <div className="container mx-auto">
            <div className="text-center mb-16">
@@ -596,51 +596,45 @@ export default function App() {
              <h2 className="text-4xl font-bold text-slate-900 mt-2">Nossas Unidades</h2>
            </div>
 
-           <div className="grid md:grid-cols-3 gap-8">
+           {/* Grid ajustado para 2 colunas centralizadas */}
+           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {[
                 { 
-                  title: "Unidade Varginha",
-                  img: "https://cdn.agsup.com.br/grv/unidade-varginha.jpeg?q=80&w=800", 
-                  address: "Zona Rural - Varginha, MG",
-                  phone: "(35) 99972-6322",
-                  whatsappLink: "https://agsup.click/clinica-varginha"
-                },
-                { 
                   title: "Unidade Três Pontas",
-                  img: "https://cdn.agsup.com.br/grv/unidade-paraguacu.jpeg?q=80&w=800", 
-                  address: "Estrada Principal - Três Pontas, MG",
+                  img: "https://cdn.agsup.com.br/grv/unidade-tres-pontas.jpeg?q=80&w=800", 
+                  address: "Condomínio Chácaras do Lago - Três Pontas, MG",
                   phone: "(35) 99972-6322",
                   whatsappLink: "https://agsup.click/clinica-tres-pontas"
                 },
                 { 
                   title: "Unidade Paraguaçu",
                   img: "https://cdn.agsup.com.br/grv/unidade-paraguacu.jpeg?q=80&w=800", 
-                  address: "Área Verde - Paraguaçu, MG",
+                  address: "Rodovia BR 491 KM 209 - Paraguaçu, MG",
                   phone: "(35) 99972-6322",
                   whatsappLink: "https://agsup.click/clinica-paraguacu"
                 }
               ].map((unit, i) => (
                 <FadeIn key={i} delay={i * 0.1}>
                   <div className="bg-slate-900 rounded-2xl overflow-hidden shadow-2xl group h-full flex flex-col">
-                     <div className="h-56 overflow-hidden relative">
+                     <div className="h-64 overflow-hidden relative"> {/* Aumentei um pouco a altura da foto para 2 cards */}
                         <img src={unit.img} alt={unit.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
                      </div>
                      <div className="p-8 flex flex-col flex-grow">
-                        <h3 className="text-xl font-bold text-white mb-6">{unit.title}</h3>
+                        <h3 className="text-2xl font-bold text-white mb-6">{unit.title}</h3>
                         
                         <div className="space-y-4 text-slate-300 text-sm mb-8 flex-grow">
                           <div className="flex gap-3">
-                             <MapPin className="text-teal-500 shrink-0" size={18} />
-                             <span>{unit.address}</span>
+                             <MapPin className="text-teal-500 shrink-0" size={20} />
+                             <span className="text-base">{unit.address}</span>
                           </div>
                           <div className="flex gap-3">
-                             <Phone className="text-teal-500 shrink-0" size={18} />
-                             <span>{unit.phone}</span>
+                             <Phone className="text-teal-500 shrink-0" size={20} />
+                             <span className="text-base">{unit.phone}</span>
                           </div>
                           <div className="flex gap-3">
-                             <Clock className="text-teal-500 shrink-0" size={18} />
-                             <span>24 horas - Todos os dias</span>
+                             <Clock className="text-teal-500 shrink-0" size={20} />
+                             <span className="text-base">24 horas - Todos os dias</span>
                           </div>
                         </div>
 
@@ -648,6 +642,7 @@ export default function App() {
                           <button onClick={handleCall} className="flex items-center justify-center gap-2 w-full text-white font-medium py-2 hover:text-teal-400 transition">
                              <Phone size={16} /> Ligar Agora
                           </button>
+                          {/* BOTÃO WHATSAPP ESPECÍFICO DA UNIDADE */}
                           <Button variant="whatsapp" onClick={() => window.open(unit.whatsappLink, '_blank')} className="w-full py-3 text-sm flex justify-center gap-2 shadow-none">
                              <WhatsAppIcon className="w-5 h-5" /> Falar no WhatsApp
                           </Button>
@@ -872,4 +867,5 @@ export default function App() {
     </div>
   );
 }
+
 
