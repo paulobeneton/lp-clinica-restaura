@@ -91,7 +91,7 @@ const FadeIn = ({ children, delay = 0 }) => (
   </motion.div>
 );
 
-// --- COMPONENTE CARROSSEL ---
+// --- COMPONENTE CARROSSEL SOFISTICADO ---
 const GalleryCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxImage, setLightboxImage] = useState(null);
@@ -107,6 +107,7 @@ const GalleryCarousel = () => {
 
   return (
     <div className="relative w-full max-w-7xl mx-auto px-4 md:px-8 group">
+      {/* Lightbox */}
       <AnimatePresence>
         {lightboxImage && (
           <motion.div 
@@ -120,6 +121,7 @@ const GalleryCarousel = () => {
         )}
       </AnimatePresence>
 
+      {/* Carrossel Container */}
       <div className="overflow-hidden">
         <motion.div 
           className="flex gap-6"
@@ -141,6 +143,7 @@ const GalleryCarousel = () => {
         </motion.div>
       </div>
 
+      {/* Setas de Navegação */}
       <button 
         onClick={prevSlide} 
         disabled={currentIndex === 0}
@@ -264,7 +267,7 @@ export default function App() {
         </AnimatePresence>
       </nav>
 
-      {/* 1️⃣ HERO SECTION */}
+      {/* 1️⃣ HERO SECTION - COM ALTURA REDUZIDA PARA 450PX */}
       <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-slate-900 overflow-hidden min-h-[calc(100vh-6rem)] flex items-center">
         <div className="absolute inset-0 z-0">
           <img 
@@ -305,6 +308,7 @@ export default function App() {
               </FadeIn>
             </div>
             
+            {/* IMAGEM DIREITA COM ALTURA CORRIGIDA (450px) */}
             <div className="lg:w-1/2 w-full hidden lg:block">
               <FadeIn delay={0.2}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-slate-800">
@@ -733,13 +737,11 @@ export default function App() {
       {/* FOOTER */}
       <footer className="bg-slate-950 text-slate-400 py-12 text-sm border-t border-slate-800">
         <div className="container mx-auto px-6 flex flex-col items-center gap-6">
-            {/* Ícone da Logo Apenas */}
-            <div className="flex items-center justify-center gap-2">
-              <Heart className="text-teal-600" fill="currentColor" size={24} />
-            </div>
-            
-            {/* Créditos Supimpa */}
-            <p className="text-center text-xs text-slate-500">
+            {/* Créditos Supimpa - Com fonte Funnel Display */}
+            <p 
+              className="text-center text-base text-slate-500" 
+              style={{ fontFamily: "'Funnel Display', sans-serif" }}
+            >
                Grupo Restaura Vidas {new Date().getFullYear()} - Feito com <span style={{color: 'red'}}>❤</span> pelo time da <a title="Gostou? Podemos ajudar sua empresa também! Entre em contato" href="https://agenciasupimpa.com.br?utm_source=gruporestauravida&amp;utm_id=clientes" target="_blank" rel="noopener" className="hover:text-teal-500 transition"><b>SUPIMPA</b> - Agência Digital</a>
             </p>
         </div>
