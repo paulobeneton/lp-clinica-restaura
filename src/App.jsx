@@ -762,8 +762,8 @@ export default function App() {
 
             {/* Lado Direito (Formulário) */}
             <div className="lg:w-7/12 p-12 bg-white">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">Solicite uma Ligação</h3>
-              <p className="text-slate-500 mb-8 font-light">Preencha os dados abaixo e ligamos para você em instantes.</p>
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">Entre em contato</h3>
+              <p className="text-slate-500 mb-8 font-light">Preencha os dados abaixo e entramos em contato pelo WhatsApp.</p>
               
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-5">
@@ -823,4 +823,5 @@ export default function App() {
     </div>
   );
 }
+
 
