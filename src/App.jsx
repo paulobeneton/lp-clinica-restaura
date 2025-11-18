@@ -185,44 +185,61 @@ export default function App() {
       <GlobalStyles />
       
 {/* HEADER PREMIUM CENTRALIZADO */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm h-24 transition-all duration-300">
+<nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm h-24 transition-all duration-300">
         <div className="container mx-auto px-6 h-full flex justify-between items-center relative">
           
-          {/* LADO ESQUERDO: MENU DE LINKS */}
-          <div className="hidden lg:flex items-center gap-1 w-1/3">
-            <a href="#tratamento" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Tratamento</a>
-            <a href="#galeria" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Estrutura</a>
-            <a href="#unidades" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Unidades</a>
+          {/* LADO ESQUERDO: MENU DE LINKS (Maior e com Fonte Nova) */}
+          <div className="hidden lg:flex items-center gap-6 w-1/3">
+            <a 
+              href="#tratamento" 
+              style={{ fontFamily: "'Funnel Display', sans-serif" }} 
+              className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl"
+            >
+              Tratamento
+            </a>
+            <a 
+              href="#galeria" 
+              style={{ fontFamily: "'Funnel Display', sans-serif" }} 
+              className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl"
+            >
+              Estrutura
+            </a>
+            <a 
+              href="#unidades" 
+              style={{ fontFamily: "'Funnel Display', sans-serif" }} 
+              className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl"
+            >
+              Unidades
+            </a>
           </div>
 
-          {/* CENTRO: LOGO (Estilo Brasão/Overlapping) */}
-          {/* No Mobile fica na esquerda padrão, no Desktop fica centralizado e maior */}
-          <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center">
-             <div className="bg-white lg:px-6 lg:pb-4 lg:pt-2 lg:rounded-b-3xl lg:shadow-sm border-b border-x border-slate-100 lg:border-t-0 border-transparent transition-all">
+          {/* CENTRO: LOGO GIGANTE (Estilo Brasão) */}
+          <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10">
+             <div className="bg-white lg:px-10 lg:pb-8 lg:pt-4 lg:rounded-b-[3rem] lg:shadow-md border-b border-x border-slate-100 lg:border-t-0 border-transparent transition-all">
                 <img 
                   src="https://cdn.agsup.com.br/grv/logo.png" 
                   alt="Grupo Restaura Vidas" 
-                  className="h-14 w-auto lg:h-28 lg:w-auto object-contain transition-all duration-300"
+                  className="h-14 w-auto lg:h-40 lg:w-auto object-contain transition-all duration-300"
                 />
              </div>
           </div>
 
           {/* LADO DIREITO: CTA (TELEFONE + BOTÃO) */}
-          <div className="hidden lg:flex items-center justify-end gap-6 w-1/3">
+          <div className="hidden lg:flex items-center justify-end gap-8 w-1/3">
              <div className="text-right">
                <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
-               <a href="tel:08001234567" className="text-lg font-bold text-slate-900 hover:text-teal-600 transition font-mono">0800 123 4567</a>
+               <a href="tel:08001234567" className="text-xl font-bold text-slate-900 hover:text-teal-600 transition font-mono">0800 123 4567</a>
              </div>
              <Button variant="headerCall" onClick={handleCall}>LIGAR AGORA</Button>
           </div>
 
-          {/* MOBILE TOGGLE (Hambúrguer) */}
+          {/* MOBILE TOGGLE */}
           <button className="lg:hidden text-slate-800 ml-auto" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X strokeWidth={1.5} /> : <Menu strokeWidth={1.5} />}
           </button>
         </div>
 
-        {/* MENU MOBILE (Mantido igual) */}
+        {/* MENU MOBILE */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
@@ -231,9 +248,9 @@ export default function App() {
               exit={{ opacity: 0, y: -20 }}
               className="lg:hidden bg-white border-t border-slate-100 p-4 flex flex-col gap-3 shadow-xl absolute w-full"
             >
-              <a href="#tratamento" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Tratamento</a>
-              <a href="#unidades" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Unidades</a>
-              <a href="#galeria" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Estrutura</a>
+              <a href="#tratamento" onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "'Funnel Display', sans-serif" }} className="py-3 px-4 text-lg text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Tratamento</a>
+              <a href="#unidades" onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "'Funnel Display', sans-serif" }} className="py-3 px-4 text-lg text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Unidades</a>
+              <a href="#galeria" onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "'Funnel Display', sans-serif" }} className="py-3 px-4 text-lg text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Estrutura</a>
               <div className="py-2 px-4 border-t border-slate-100 mt-2">
                  <p className="text-xs text-slate-400 uppercase font-bold">Emergência</p>
                  <p className="text-lg font-bold text-slate-900">0800 123 4567</p>
@@ -730,4 +747,5 @@ export default function App() {
       </a>
     </div>
   );
+
 }
