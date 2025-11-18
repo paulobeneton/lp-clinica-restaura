@@ -184,50 +184,60 @@ export default function App() {
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
       
-      {/* HEADER - BRANCO E CLEAN */}
-      <nav className="fixed top-0 w-full z-50 bg-white border-b border-slate-100 shadow-sm transition-all duration-300">
-        <div className="container mx-auto px-6 h-24 flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-             <img 
-              src="https://cdn.agsup.com.br/grv/logo.png" 
-              alt="Grupo Restaura Vidas" 
-              className="h-16 w-auto object-contain"
-            />
-          </div>
-
-          {/* Menu Desktop */}
-          <div className="hidden md:flex items-center gap-2">
+{/* HEADER PREMIUM CENTRALIZADO */}
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm h-24 transition-all duration-300">
+        <div className="container mx-auto px-6 h-full flex justify-between items-center relative">
+          
+          {/* LADO ESQUERDO: MENU DE LINKS */}
+          <div className="hidden lg:flex items-center gap-1 w-1/3">
             <a href="#tratamento" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Tratamento</a>
-            <a href="#unidades" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Unidades</a>
             <a href="#galeria" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Estrutura</a>
-            
-            <div className="ml-6 pl-6 border-l border-slate-200 flex items-center gap-6">
-               <div className="text-right hidden lg:block">
-                 <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
-                 <a href="tel:08001234567" className="text-lg font-bold text-slate-900 hover:text-teal-600 transition font-mono">0800 123 4567</a>
-               </div>
-               <Button variant="headerCall" onClick={handleCall}>LIGAR AGORA</Button>
-            </div>
+            <a href="#unidades" className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-teal-700 transition-colors rounded-lg hover:bg-slate-50">Unidades</a>
           </div>
 
-          <button className="md:hidden text-slate-800" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {/* CENTRO: LOGO (Estilo Brasão/Overlapping) */}
+          {/* No Mobile fica na esquerda padrão, no Desktop fica centralizado e maior */}
+          <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center">
+             <div className="bg-white lg:px-6 lg:pb-4 lg:pt-2 lg:rounded-b-3xl lg:shadow-sm border-b border-x border-slate-100 lg:border-t-0 border-transparent transition-all">
+                <img 
+                  src="https://cdn.agsup.com.br/grv/logo.png" 
+                  alt="Grupo Restaura Vidas" 
+                  className="h-14 w-auto lg:h-28 lg:w-auto object-contain transition-all duration-300"
+                />
+             </div>
+          </div>
+
+          {/* LADO DIREITO: CTA (TELEFONE + BOTÃO) */}
+          <div className="hidden lg:flex items-center justify-end gap-6 w-1/3">
+             <div className="text-right">
+               <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
+               <a href="tel:08001234567" className="text-lg font-bold text-slate-900 hover:text-teal-600 transition font-mono">0800 123 4567</a>
+             </div>
+             <Button variant="headerCall" onClick={handleCall}>LIGAR AGORA</Button>
+          </div>
+
+          {/* MOBILE TOGGLE (Hambúrguer) */}
+          <button className="lg:hidden text-slate-800 ml-auto" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X strokeWidth={1.5} /> : <Menu strokeWidth={1.5} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* MENU MOBILE (Mantido igual) */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="md:hidden bg-white border-t border-slate-100 p-4 flex flex-col gap-3 shadow-xl absolute w-full"
+              className="lg:hidden bg-white border-t border-slate-100 p-4 flex flex-col gap-3 shadow-xl absolute w-full"
             >
               <a href="#tratamento" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Tratamento</a>
               <a href="#unidades" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Unidades</a>
               <a href="#galeria" onClick={() => setIsMenuOpen(false)} className="py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Estrutura</a>
+              <div className="py-2 px-4 border-t border-slate-100 mt-2">
+                 <p className="text-xs text-slate-400 uppercase font-bold">Emergência</p>
+                 <p className="text-lg font-bold text-slate-900">0800 123 4567</p>
+              </div>
               <Button variant="headerCall" onClick={handleCall} className="w-full mt-2">LIGAR AGORA</Button>
             </motion.div>
           )}
