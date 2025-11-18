@@ -7,7 +7,7 @@ import {
   Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, ZoomIn
 } from 'lucide-react';
 
-// --- ÍCONE WHATSAPP OFICIAL (Vetorizado para não dar erro de carregamento) ---
+// --- ÍCONE WHATSAPP OFICIAL (Vetorizado) ---
 const WhatsAppIcon = ({ className }) => (
   <svg 
     viewBox="0 0 24 24" 
@@ -91,7 +91,7 @@ const FadeIn = ({ children, delay = 0 }) => (
   </motion.div>
 );
 
-// --- COMPONENTE CARROSSEL ---
+// --- COMPONENTE CARROSSEL SOFISTICADO ---
 const GalleryCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxImage, setLightboxImage] = useState(null);
@@ -121,7 +121,7 @@ const GalleryCarousel = () => {
         )}
       </AnimatePresence>
 
-      {/* Carrossel */}
+      {/* Carrossel Container */}
       <div className="overflow-hidden">
         <motion.div 
           className="flex gap-6"
@@ -143,6 +143,7 @@ const GalleryCarousel = () => {
         </motion.div>
       </div>
 
+      {/* Setas de Navegação */}
       <button 
         onClick={prevSlide} 
         disabled={currentIndex === 0}
@@ -199,18 +200,18 @@ export default function App() {
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
       
-      {/* HEADER */}
+      {/* HEADER PREMIUM CENTRALIZADO COM SOMBRA/BORDA NA LOGO */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm h-24 transition-all duration-300">
         <div className="container mx-auto px-6 h-full flex justify-between items-center relative">
           
-          {/* MENU DIREITA */}
+          {/* LADO ESQUERDO: MENU ALINHADO À DIREITA (Próximo da Logo) */}
           <div className="hidden lg:flex items-center justify-end gap-8 w-5/12 pr-16">
             <a href="#tratamento" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Tratamento</a>
             <a href="#galeria" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Estrutura</a>
             <a href="#unidades" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Unidades</a>
           </div>
 
-          {/* LOGO CENTRO */}
+          {/* CENTRO: LOGO COM SOMBRA E BORDA (VISÍVEL NO FUNDO BRANCO) */}
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10">
              <div className="bg-white lg:px-6 lg:pb-3 lg:pt-3 lg:rounded-b-2xl shadow-lg border border-slate-200 lg:border-t-0 transition-all">
                 <img 
@@ -221,7 +222,7 @@ export default function App() {
              </div>
           </div>
 
-          {/* BOTÃO WHATSAPP DIREITA */}
+          {/* LADO DIREITO: BOTÃO WHATSAPP */}
           <div className="hidden lg:flex items-center justify-start gap-8 w-5/12 pl-16">
              <div className="text-right">
                <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
@@ -232,7 +233,7 @@ export default function App() {
              </Button>
           </div>
 
-          {/* MOBILE */}
+          {/* MOBILE TOGGLE */}
           <button className="lg:hidden text-slate-800 ml-auto" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X strokeWidth={1.5} /> : <Menu strokeWidth={1.5} />}
           </button>
@@ -263,11 +264,11 @@ export default function App() {
       </nav>
 
       {/* 1️⃣ HERO SECTION */}
-      <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-slate-900 overflow-hidden">
+      <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-slate-900 overflow-hidden min-h-[calc(100vh-6rem)] flex items-center">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2670&auto=format&fit=crop" 
-            alt="Background" 
+            src="https://images.unsplash.com/photo-1594178056038-f86460166649?q=80&w=2070&auto=format&fit=crop" 
+            alt="Família feliz se abraçando" 
             className="w-full h-full object-cover opacity-30"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent"></div>
@@ -280,7 +281,7 @@ export default function App() {
                 <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/5 border border-white/10 text-teal-300 text-sm font-medium mb-8 backdrop-blur-sm">
                   <Clock size={14} /> Atendimento Humanizado 24 horas
                 </div>
-                <h1 className="text-5xl lg:text-7xl font-bold text-white mb-8 leading-[1.1] tracking-tight">
+                <h1 className="text-4xl lg:text-6xl font-bold text-white mb-8 leading-[1.1] tracking-tight">
                   A recuperação começa com <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-200">um passo.</span>
                 </h1>
                 <p className="text-xl text-slate-300 mb-10 leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
@@ -307,7 +308,7 @@ export default function App() {
               <FadeIn delay={0.2}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
                   <img 
-                    src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?q=80&w=2670&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1594178056038-f86460166649?q=80&w=2070&auto=format&fit=crop" 
                     alt="Acolhimento e Paz" 
                     className="w-full h-[600px] object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
@@ -396,6 +397,7 @@ export default function App() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 relative items-stretch">
+             {/* Linha Conectora */}
              <div className="hidden md:block absolute top-10 left-0 w-full h-0.5 bg-slate-200 -z-10"></div>
 
             <FadeIn delay={0.1}>
