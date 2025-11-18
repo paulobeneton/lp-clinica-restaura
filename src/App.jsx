@@ -188,12 +188,12 @@ export default function App() {
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
       
-      {/* HEADER PREMIUM CENTRALIZADO AJUSTADO */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm h-24 transition-all duration-300">
+      {/* HEADER PREMIUM COM CORREÇÃO DE VISUALIZAÇÃO */}
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm h-24 transition-all duration-300">
         <div className="container mx-auto px-6 h-full flex justify-between items-center relative">
           
-          {/* LADO ESQUERDO: MENU DE LINKS (Alinhado à Direita do bloco, próximo à logo) */}
-          <div className="hidden lg:flex items-center justify-end gap-8 w-5/12 pr-12">
+          {/* LADO ESQUERDO: MENU ALINHADO À DIREITA (Colado na Logo) */}
+          <div className="hidden lg:flex items-center justify-end gap-8 w-5/12 pr-16">
             <a 
               href="#tratamento" 
               style={{ fontFamily: "'Funnel Display', sans-serif" }} 
@@ -217,19 +217,19 @@ export default function App() {
             </a>
           </div>
 
-          {/* CENTRO: LOGO PROPORCIONAL (Estilo Brasão Suave) */}
+          {/* CENTRO: LOGO COM SOMBRA E BORDA PARA DESTAQUE NO BRANCO */}
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10">
-             <div className="bg-white lg:px-6 lg:pb-4 lg:pt-3 lg:rounded-b-2xl lg:shadow-sm border-b border-x border-slate-100 lg:border-t-0 border-transparent transition-all">
+             <div className="bg-white lg:px-6 lg:pb-3 lg:pt-3 lg:rounded-b-2xl shadow-lg border border-slate-200 lg:border-t-0 transition-all">
                 <img 
                   src="https://cdn.agsup.com.br/grv/logo.png" 
                   alt="Grupo Restaura Vidas" 
-                  className="h-14 w-auto lg:h-28 lg:w-auto object-contain transition-all duration-300"
+                  className="h-12 w-auto lg:h-24 lg:w-auto object-contain transition-all duration-300"
                 />
              </div>
           </div>
 
-          {/* LADO DIREITO: CTA (TELEFONE + BOTÃO WHATSAPP) */}
-          <div className="hidden lg:flex items-center justify-start gap-8 w-5/12 pl-12">
+          {/* LADO DIREITO: BOTÃO WHATSAPP */}
+          <div className="hidden lg:flex items-center justify-start gap-8 w-5/12 pl-16">
              <div className="text-right">
                <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
                <a href="tel:08001234567" className="text-xl font-bold text-slate-900 hover:text-teal-600 transition font-mono">0800 123 4567</a>
