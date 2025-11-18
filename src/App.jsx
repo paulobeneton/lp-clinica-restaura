@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Phone, MapPin, Clock, Heart, ShieldCheck, 
   Activity, Users, ArrowRight, CheckCircle2, Menu, X, Star,
-  MessageCircle, ChevronDown, ChevronLeft, ChevronRight, Home, Lock, Stethoscope, 
+  ChevronDown, ChevronLeft, ChevronRight, Home, Lock, Stethoscope, 
   Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, ZoomIn, Calendar
 } from 'lucide-react';
 
@@ -188,11 +188,11 @@ export default function App() {
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
       
-      {/* HEADER PREMIUM COM CORREÇÃO DE VISUALIZAÇÃO */}
+      {/* HEADER */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm h-24 transition-all duration-300">
         <div className="container mx-auto px-6 h-full flex justify-between items-center relative">
           
-          {/* LADO ESQUERDO: MENU ALINHADO À DIREITA (Colado na Logo) */}
+          {/* LADO ESQUERDO: MENU */}
           <div className="hidden lg:flex items-center justify-end gap-8 w-5/12 pr-16">
             <a 
               href="#tratamento" 
@@ -217,7 +217,7 @@ export default function App() {
             </a>
           </div>
 
-          {/* CENTRO: LOGO COM SOMBRA E BORDA PARA DESTAQUE NO BRANCO */}
+          {/* CENTRO: LOGO */}
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10">
              <div className="bg-white lg:px-6 lg:pb-3 lg:pt-3 lg:rounded-b-2xl shadow-lg border border-slate-200 lg:border-t-0 transition-all">
                 <img 
@@ -235,7 +235,7 @@ export default function App() {
                <a href="tel:08001234567" className="text-xl font-bold text-slate-900 hover:text-teal-600 transition font-mono">0800 123 4567</a>
              </div>
              <Button variant="whatsapp" onClick={() => handleWhatsApp()}>
-               <MessageCircle size={20} /> WhatsApp
+               <img src="https://cdn.agsup.com.br/grv/whatsapp.svg" alt="WhatsApp" className="w-5 h-5" /> WhatsApp
              </Button>
           </div>
 
@@ -262,7 +262,7 @@ export default function App() {
                  <p className="text-lg font-bold text-slate-900">0800 123 4567</p>
               </div>
               <Button variant="whatsapp" onClick={() => handleWhatsApp()} className="w-full mt-2 flex justify-center gap-2">
-                 <MessageCircle size={20} /> WhatsApp
+                 <img src="https://cdn.agsup.com.br/grv/whatsapp.svg" alt="WhatsApp" className="w-5 h-5" /> WhatsApp
               </Button>
             </motion.div>
           )}
@@ -299,7 +299,7 @@ export default function App() {
                     Quero Ajuda Agora
                   </Button>
                   <Button variant="outline" onClick={() => handleWhatsApp()} className="min-w-[200px]">
-                    <MessageCircle size={20} /> Falar no WhatsApp
+                    <img src="https://cdn.agsup.com.br/grv/whatsapp.svg" alt="WhatsApp" className="w-5 h-5" /> Falar no WhatsApp
                   </Button>
                 </div>
                 <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap justify-center lg:justify-start gap-8 text-slate-400 text-sm font-medium">
@@ -335,7 +335,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* 2️⃣ ESPECIALISTAS EM RECUPERAÇÃO (Cards com Destaque e Texto de Copy) */}
+      {/* 2️⃣ ESPECIALISTAS EM RECUPERAÇÃO */}
       <Section bg="gray">
         <div className="container mx-auto">
            <div className="text-center mb-12 max-w-3xl mx-auto">
@@ -394,7 +394,7 @@ export default function App() {
         </FadeIn>
       </Section>
 
-      {/* 4️⃣ JORNADA DE TRATAMENTO (BOXES ALINHADOS) */}
+      {/* 4️⃣ JORNADA DE TRATAMENTO */}
       <Section id="tratamento" bg="gray">
         <div className="container mx-auto">
           <div className="text-center mb-20">
@@ -445,7 +445,7 @@ export default function App() {
          <GalleryCarousel />
       </Section>
 
-      {/* 6️⃣ EXCELÊNCIA NO CUIDADO (EM BLOCOS SEPARADOS E VALORIZADOS) */}
+      {/* 6️⃣ EXCELÊNCIA NO CUIDADO */}
       <Section id="equipe" bg="white">
         <div className="container mx-auto">
            <div className="text-center mb-20">
@@ -530,7 +530,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 7️⃣ UNIDADES (RESTAURADA e PREMIUM) */}
+      {/* 7️⃣ UNIDADES */}
       <Section id="unidades" className="bg-white border-t border-slate-100">
          <div className="container mx-auto">
            <div className="text-center mb-16">
@@ -726,8 +726,8 @@ export default function App() {
                       <option>Outros</option>
                    </select>
                 </div>
-                <Button variant="primary" className="w-full py-5 text-lg shadow-xl shadow-orange-500/20">
-                  Enviar Pedido de Ajuda
+                <Button variant="whatsapp" className="w-full py-5 text-lg shadow-xl shadow-green-500/20 flex justify-center items-center gap-3">
+                  <img src="https://cdn.agsup.com.br/grv/whatsapp.svg" alt="WhatsApp" className="w-6 h-6" /> CHAMAR NO WHATSAPP
                 </Button>
               </form>
             </div>
@@ -750,7 +750,7 @@ export default function App() {
       {/* Botão Flutuante WhatsApp */}
       <a href="https://wa.me/5511999999999" target="_blank" className="fixed bottom-6 right-6 z-50 hover:-translate-y-1 transition-transform">
         <div className="bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full shadow-2xl shadow-green-500/30 flex items-center justify-center">
-          <MessageCircle size={32} fill="currentColor" />
+          <img src="https://cdn.agsup.com.br/grv/whatsapp.svg" alt="WhatsApp" className="w-8 h-8" />
         </div>
       </a>
     </div>
