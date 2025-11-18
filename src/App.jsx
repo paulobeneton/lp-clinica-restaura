@@ -4,7 +4,7 @@ import {
   Phone, MapPin, Clock, Heart, ShieldCheck, 
   Activity, Users, ArrowRight, CheckCircle2, Menu, X, Star,
   MessageCircle, ChevronDown, ChevronLeft, ChevronRight, Home, Lock, Stethoscope, 
-  Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, Search, ZoomIn
+  Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, ZoomIn, Calendar
 } from 'lucide-react';
 
 // --- CONFIGURAÇÃO GLOBAL & FONTES ---
@@ -43,7 +43,8 @@ const Button = ({ children, variant = 'primary', className = '', onClick, ...pro
     secondary: "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20",
     outline: "border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm",
     ghost: "text-slate-600 hover:text-teal-700 hover:bg-teal-50 font-semibold shadow-none rounded-lg px-4",
-    headerCall: "bg-teal-600 hover:bg-teal-700 text-white shadow-teal-600/20 px-6 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transform hover:-translate-y-0.5"
+    headerCall: "bg-teal-600 hover:bg-teal-700 text-white shadow-teal-600/20 px-6 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transform hover:-translate-y-0.5",
+    whatsapp: "bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-green-500/20 px-6 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transform hover:-translate-y-0.5"
   };
   
   return (
@@ -94,6 +95,7 @@ const GalleryCarousel = () => {
 
   return (
     <div className="relative w-full max-w-7xl mx-auto px-4 md:px-8 group">
+      {/* Lightbox */}
       <AnimatePresence>
         {lightboxImage && (
           <motion.div 
@@ -107,6 +109,7 @@ const GalleryCarousel = () => {
         )}
       </AnimatePresence>
 
+      {/* Carrossel Container */}
       <div className="overflow-hidden">
         <motion.div 
           className="flex gap-6"
@@ -128,6 +131,7 @@ const GalleryCarousel = () => {
         </motion.div>
       </div>
 
+      {/* Setas de Navegação */}
       <button 
         onClick={prevSlide} 
         disabled={currentIndex === 0}
@@ -184,12 +188,12 @@ export default function App() {
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
       
-{/* HEADER PREMIUM CENTRALIZADO */}
-<nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm h-24 transition-all duration-300">
+      {/* HEADER PREMIUM CENTRALIZADO AJUSTADO */}
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm h-24 transition-all duration-300">
         <div className="container mx-auto px-6 h-full flex justify-between items-center relative">
           
-          {/* LADO ESQUERDO: MENU DE LINKS (Maior e com Fonte Nova) */}
-          <div className="hidden lg:flex items-center gap-6 w-1/3">
+          {/* LADO ESQUERDO: MENU DE LINKS (Alinhado à Direita do bloco, próximo à logo) */}
+          <div className="hidden lg:flex items-center justify-end gap-8 w-5/12 pr-12">
             <a 
               href="#tratamento" 
               style={{ fontFamily: "'Funnel Display', sans-serif" }} 
@@ -213,24 +217,26 @@ export default function App() {
             </a>
           </div>
 
-          {/* CENTRO: LOGO GIGANTE (Estilo Brasão) */}
+          {/* CENTRO: LOGO PROPORCIONAL (Estilo Brasão Suave) */}
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10">
-             <div className="bg-white lg:px-10 lg:pb-8 lg:pt-4 lg:rounded-b-[3rem] lg:shadow-md border-b border-x border-slate-100 lg:border-t-0 border-transparent transition-all">
+             <div className="bg-white lg:px-6 lg:pb-4 lg:pt-3 lg:rounded-b-2xl lg:shadow-sm border-b border-x border-slate-100 lg:border-t-0 border-transparent transition-all">
                 <img 
                   src="https://cdn.agsup.com.br/grv/logo.png" 
                   alt="Grupo Restaura Vidas" 
-                  className="h-14 w-auto lg:h-40 lg:w-auto object-contain transition-all duration-300"
+                  className="h-14 w-auto lg:h-28 lg:w-auto object-contain transition-all duration-300"
                 />
              </div>
           </div>
 
-          {/* LADO DIREITO: CTA (TELEFONE + BOTÃO) */}
-          <div className="hidden lg:flex items-center justify-end gap-8 w-1/3">
+          {/* LADO DIREITO: CTA (TELEFONE + BOTÃO WHATSAPP) */}
+          <div className="hidden lg:flex items-center justify-start gap-8 w-5/12 pl-12">
              <div className="text-right">
                <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
                <a href="tel:08001234567" className="text-xl font-bold text-slate-900 hover:text-teal-600 transition font-mono">0800 123 4567</a>
              </div>
-             <Button variant="headerCall" onClick={handleCall}>LIGAR AGORA</Button>
+             <Button variant="whatsapp" onClick={() => handleWhatsApp()}>
+               <MessageCircle size={20} /> WhatsApp
+             </Button>
           </div>
 
           {/* MOBILE TOGGLE */}
@@ -255,7 +261,9 @@ export default function App() {
                  <p className="text-xs text-slate-400 uppercase font-bold">Emergência</p>
                  <p className="text-lg font-bold text-slate-900">0800 123 4567</p>
               </div>
-              <Button variant="headerCall" onClick={handleCall} className="w-full mt-2">LIGAR AGORA</Button>
+              <Button variant="whatsapp" onClick={() => handleWhatsApp()} className="w-full mt-2 flex justify-center gap-2">
+                 <MessageCircle size={20} /> WhatsApp
+              </Button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -386,7 +394,7 @@ export default function App() {
         </FadeIn>
       </Section>
 
-      {/* 4️⃣ JORNADA DE TRATAMENTO */}
+      {/* 4️⃣ JORNADA DE TRATAMENTO (BOXES ALINHADOS) */}
       <Section id="tratamento" bg="gray">
         <div className="container mx-auto">
           <div className="text-center mb-20">
@@ -747,5 +755,4 @@ export default function App() {
       </a>
     </div>
   );
-
 }
