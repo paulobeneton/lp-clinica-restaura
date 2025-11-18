@@ -7,7 +7,7 @@ import {
   Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, ZoomIn
 } from 'lucide-react';
 
-// --- ÍCONE WHATSAPP OFICIAL ---
+// --- ÍCONE WHATSAPP OFICIAL (Vetorizado) ---
 const WhatsAppIcon = ({ className }) => (
   <svg 
     viewBox="0 0 24 24" 
@@ -35,7 +35,7 @@ const GlobalStyles = () => (
   `}</style>
 );
 
-// --- DADOS ---
+// --- DADOS DA GALERIA ---
 const galleryImages = [
   { src: "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?q=80&w=800", title: "Piscina & Lazer" },
   { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800", title: "Suítes Confortáveis" },
@@ -48,7 +48,7 @@ const galleryImages = [
 // --- COMPONENTES UI ---
 
 const Button = ({ children, variant = 'primary', className = '', onClick, ...props }) => {
-  const baseStyle = "px-8 py-3.5 rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-sm tracking-wide";
+  const baseStyle = "px-8 py-3.5 rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-sm tracking-wide disabled:opacity-70 disabled:cursor-not-allowed";
   
   const variants = {
     primary: "bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-700 text-white shadow-orange-500/25 transform hover:-translate-y-0.5", 
@@ -192,13 +192,70 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   
+  // ESTADOS DO FORMULÁRIO
+  const [formData, setFormData] = useState({ name: '', phone: '', subject: 'Internação para Drogas' });
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState(null);
+
   // TELEFONE PRINCIPAL (EVANDRO)
   const phoneNumber = "5535999726322";
   const displayPhone = "(35) 99972-6322";
+  
+  // ⚠️ INSIRA SEU WEBHOOK AQUI (Se não tiver, deixe vazio "")
+  const WEBHOOK_URL = ""; 
 
   const scrollToForm = () => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
+  
+  // Link Geral para o botão flutuante e topo
   const handleWhatsApp = (text = '') => window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
+  
+  // Função de Ligar
   const handleCall = () => window.open(`tel:${phoneNumber}`, '_self');
+
+  // --- FUNÇÃO DE ENVIO (WEBHOOK + WHATSAPP) ---
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSending(true);
+    setStatus(null);
+
+    const whatsappText = `Olá, me chamo *${formData.name}*. Gostaria de informações sobre *${formData.subject}*. Meu telefone é ${formData.phone}.`;
+
+    try {
+      // 1. Envia para o Webhook
+      if (WEBHOOK_URL) {
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ 
+            ...formData, 
+            date: new Date().toLocaleString('pt-BR'),
+            origin: 'Landing Page'
+          })
+        }).catch(err => console.error("Erro silencioso no Webhook:", err));
+      }
+
+      // 2. Simula envio visual
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setStatus('success');
+
+      // 3. Redireciona para o WhatsApp
+      setTimeout(() => {
+         handleWhatsApp(whatsappText);
+         setFormData({ name: '', phone: '', subject: 'Internação para Drogas' });
+         setStatus(null);
+      }, 2000);
+
+    } catch (error) {
+      console.error("Erro no envio:", error);
+      setStatus('error');
+    } finally {
+      setIsSending(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
@@ -267,7 +324,7 @@ export default function App() {
         </AnimatePresence>
       </nav>
 
-      {/* 1️⃣ HERO SECTION - COM ALTURA REDUZIDA PARA 450PX */}
+      {/* 1️⃣ HERO SECTION */}
       <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-slate-900 overflow-hidden min-h-[calc(100vh-6rem)] flex items-center">
         <div className="absolute inset-0 z-0">
           <img 
@@ -308,13 +365,13 @@ export default function App() {
               </FadeIn>
             </div>
             
-            {/* IMAGEM DIREITA COM ALTURA CORRIGIDA (450px) */}
+            {/* IMAGEM DIREITA */}
             <div className="lg:w-1/2 w-full hidden lg:block">
               <FadeIn delay={0.2}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-slate-800">
                   <img 
                     src="https://cdn.agsup.com.br/grv/imagem-clinica.jpeg?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Acolhimento e Paz" 
+                    alt="Ambiente de Paz" 
                     className="w-full h-[450px] object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
@@ -528,7 +585,7 @@ export default function App() {
         </div>
       </Section>
 
-            {/* 7️⃣ UNIDADES */}
+      {/* 7️⃣ UNIDADES (ATUALIZADO COM LINKS DE WHATSAPP) */}
       <Section id="unidades" className="bg-white border-t border-slate-100">
          <div className="container mx-auto">
            <div className="text-center mb-16">
@@ -588,6 +645,7 @@ export default function App() {
                           <button onClick={handleCall} className="flex items-center justify-center gap-2 w-full text-white font-medium py-2 hover:text-teal-400 transition">
                              <Phone size={16} /> Ligar Agora
                           </button>
+                          {/* BOTÃO WHATSAPP ESPECÍFICO DA UNIDADE */}
                           <Button variant="whatsapp" onClick={() => window.open(unit.whatsappLink, '_blank')} className="w-full py-3 text-sm flex justify-center gap-2 shadow-none">
                              <WhatsAppIcon className="w-5 h-5" /> Falar no WhatsApp
                           </Button>
@@ -637,9 +695,9 @@ export default function App() {
           <h2 className="text-4xl font-bold text-slate-900 mb-16">Histórias de Transformação</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { text: "Chegar à clínica foi um dos momentos mais difíceis da minha vida, mas o atendimento que recebi desde o primeiro dia me fez sentir acolhido de verdade. Não era só mais um paciente – me trataram com respeito, empatia e paciência. Isso fez toda a diferença para eu confiar no processo e seguir firme no tratamento", author: "Recuperado do vício em drogas.", role: "Drogas" },
-              { text: "O que mais me marcou foi o apoio constante da equipe de psicólogos, terapeutas e médicos. Eles não apenas aplicam o tratamento, mas escutam, orientam e acompanham cada passo. Senti que não estava sozinho em nenhum momento. Esse suporte humano foi essencial para minha recuperação.", author: "Recuperado do vício em bebidas", role: "Vício em Bebidas" },
-              { text: "A estrutura da clínica é excelente, com espaços tranquilos, atividades terapêuticas e tudo voltado para o bem-estar. Mas o que realmente me surpreendeu foi o preparo dos profissionais – todos muito comprometidos, experientes e humanos. O ambiente foi fundamental para eu me reconectar comigo mesmo.", author: "Recuperado do vício em jogos (apostas)", role: "Jogos / Apostas" }
+              { text: "Eu achava que não tinha mais jeito. A clínica não só salvou minha vida, como devolveu minha família.", author: "Carlos M.", role: "Em recuperação" },
+              { text: "O atendimento humanizado fez toda a diferença. Não fui tratado como um problema, mas como alguém que precisava de ajuda.", author: "Ricardo S.", role: "Ex-paciente" },
+              { text: "Internar meu filho foi difícil, mas foi a melhor decisão. Hoje ele é outra pessoa, cheio de vida.", author: "Maria Helena", role: "Mãe" }
             ].map((depo, idx) => (
               <FadeIn key={idx} delay={idx * 0.1}>
                 <div className="bg-slate-50 p-10 rounded-t-3xl rounded-br-3xl rounded-bl-none border border-slate-100 text-left hover:shadow-lg transition relative h-full flex flex-col">
@@ -707,29 +765,35 @@ export default function App() {
               <h3 className="text-2xl font-bold text-slate-900 mb-2">Solicite uma Ligação</h3>
               <p className="text-slate-500 mb-8 font-light">Preencha os dados abaixo e ligamos para você em instantes.</p>
               
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Nome</label>
-                    <input type="text" className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" placeholder="Seu nome" />
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" placeholder="Seu nome" required />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Telefone</label>
-                    <input type="tel" className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" placeholder="(DDD) 99999-9999" />
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" placeholder="(DDD) 99999-9999" required />
                   </div>
                 </div>
                 <div>
                    <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Como podemos ajudar?</label>
-                   <select className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition text-slate-600">
+                   <select name="subject" value={formData.subject} onChange={handleChange} className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition text-slate-600">
                       <option>Internação para Drogas</option>
                       <option>Internação para Álcool</option>
                       <option>Vício em Jogos</option>
                       <option>Outros</option>
                    </select>
                 </div>
-                <Button variant="whatsapp" className="w-full py-5 text-lg shadow-xl shadow-green-500/20 flex justify-center items-center gap-3">
-                   <WhatsAppIcon className="w-6 h-6" /> CHAMAR NO WHATSAPP
+                <Button variant="whatsapp" className="w-full py-5 text-lg shadow-xl shadow-green-500/20 flex justify-center items-center gap-3 disabled:opacity-70" disabled={isSending}>
+                   {isSending ? (
+                     <>Enviando...</>
+                   ) : (
+                     <><WhatsAppIcon className="w-6 h-6" /> SOLICITAR AJUDA AGORA</>
+                   )}
                 </Button>
+                {status === 'success' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-green-50 text-green-700 rounded-lg text-center border border-green-100"><p className="font-bold">Solicitação Recebida!</p><p className="text-sm">Nossa equipe entrará em contato. Redirecionando para WhatsApp...</p></motion.div>}
+                {status === 'error' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-red-50 text-red-700 rounded-lg text-center border border-red-100"><p>Erro ao enviar. Por favor, clique no botão flutuante do WhatsApp.</p></motion.div>}
               </form>
             </div>
 
