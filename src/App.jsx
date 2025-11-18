@@ -485,7 +485,7 @@ export default function App() {
               <div className="bg-white p-10 rounded-3xl border border-slate-200 h-full hover:shadow-xl transition-all duration-500 relative group">
                 <div className="bg-orange-500 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 text-white font-bold text-3xl shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform">1</div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Desintoxicação</h3>
-                <span className="text-xs font-bold text-orange-500 uppercase tracking-wider mb-6 block">1º e 2º Mês</span>
+                <span className="text-xs font-bold text-orange-500 uppercase tracking-wider mb-6 block">1º a 3º Mês</span>
                 <p className="text-slate-500 leading-relaxed font-light">Adaptação ao convívio e desintoxicação física. Foco na reeducação alimentar e recuperação dos aspectos físicos.</p>
               </div>
             </FadeIn>
@@ -884,6 +884,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
