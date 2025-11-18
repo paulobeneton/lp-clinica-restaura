@@ -267,7 +267,7 @@ export default function App() {
         </AnimatePresence>
       </nav>
 
-      {/* 1️⃣ HERO SECTION */}
+      {/* 1️⃣ HERO SECTION - COM ALTURA REDUZIDA PARA 450PX */}
       <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-slate-900 overflow-hidden min-h-[calc(100vh-6rem)] flex items-center">
         <div className="absolute inset-0 z-0">
           <img 
@@ -308,11 +308,12 @@ export default function App() {
               </FadeIn>
             </div>
             
+            {/* IMAGEM DIREITA COM ALTURA CORRIGIDA (450px) */}
             <div className="lg:w-1/2 w-full hidden lg:block">
               <FadeIn delay={0.2}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-slate-800">
                   <img 
-                    src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=2070&auto=format&fit=crop" 
+                    src="https://cdn.agsup.com.br/grv/imagem-clinica.jpeg?q=80&w=2070&auto=format&fit=crop" 
                     alt="Acolhimento e Paz" 
                     className="w-full h-[450px] object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
@@ -527,7 +528,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 7️⃣ UNIDADES */}
+            {/* 7️⃣ UNIDADES */}
       <Section id="unidades" className="bg-white border-t border-slate-100">
          <div className="container mx-auto">
            <div className="text-center mb-16">
@@ -636,9 +637,9 @@ export default function App() {
           <h2 className="text-4xl font-bold text-slate-900 mb-16">Histórias de Transformação</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { text: "Eu achava que não tinha mais jeito. A clínica não só salvou minha vida, como devolveu minha família.", author: "Carlos M.", role: "Em recuperação" },
-              { text: "O atendimento humanizado fez toda a diferença. Não fui tratado como um problema, mas como alguém que precisava de ajuda.", author: "Ricardo S.", role: "Ex-paciente" },
-              { text: "Internar meu filho foi difícil, mas foi a melhor decisão. Hoje ele é outra pessoa, cheio de vida.", author: "Maria Helena", role: "Mãe" }
+              { text: "Chegar à clínica foi um dos momentos mais difíceis da minha vida, mas o atendimento que recebi desde o primeiro dia me fez sentir acolhido de verdade. Não era só mais um paciente – me trataram com respeito, empatia e paciência. Isso fez toda a diferença para eu confiar no processo e seguir firme no tratamento", author: "Recuperado do vício em drogas.", role: "Drogas" },
+              { text: "O que mais me marcou foi o apoio constante da equipe de psicólogos, terapeutas e médicos. Eles não apenas aplicam o tratamento, mas escutam, orientam e acompanham cada passo. Senti que não estava sozinho em nenhum momento. Esse suporte humano foi essencial para minha recuperação.", author: "Recuperado do vício em bebidas", role: "Vício em Bebidas" },
+              { text: "A estrutura da clínica é excelente, com espaços tranquilos, atividades terapêuticas e tudo voltado para o bem-estar. Mas o que realmente me surpreendeu foi o preparo dos profissionais – todos muito comprometidos, experientes e humanos. O ambiente foi fundamental para eu me reconectar comigo mesmo.", author: "Recuperado do vício em jogos (apostas)", role: "Jogos / Apostas" }
             ].map((depo, idx) => (
               <FadeIn key={idx} delay={idx * 0.1}>
                 <div className="bg-slate-50 p-10 rounded-t-3xl rounded-br-3xl rounded-bl-none border border-slate-100 text-left hover:shadow-lg transition relative h-full flex flex-col">
