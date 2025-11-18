@@ -91,7 +91,7 @@ const FadeIn = ({ children, delay = 0 }) => (
   </motion.div>
 );
 
-// --- COMPONENTE CARROSSEL ---
+// --- COMPONENTE CARROSSEL SOFISTICADO ---
 const GalleryCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxImage, setLightboxImage] = useState(null);
@@ -107,7 +107,6 @@ const GalleryCarousel = () => {
 
   return (
     <div className="relative w-full max-w-7xl mx-auto px-4 md:px-8 group">
-      {/* Lightbox */}
       <AnimatePresence>
         {lightboxImage && (
           <motion.div 
@@ -121,7 +120,6 @@ const GalleryCarousel = () => {
         )}
       </AnimatePresence>
 
-      {/* Carrossel Container */}
       <div className="overflow-hidden">
         <motion.div 
           className="flex gap-6"
@@ -143,7 +141,6 @@ const GalleryCarousel = () => {
         </motion.div>
       </div>
 
-      {/* Setas de Navegação */}
       <button 
         onClick={prevSlide} 
         disabled={currentIndex === 0}
@@ -204,14 +201,14 @@ export default function App() {
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm h-24 transition-all duration-300">
         <div className="container mx-auto px-6 h-full flex justify-between items-center relative">
           
-          {/* MENU DIREITA (Mantido alinhado à direita próximo da logo) */}
+          {/* MENU DIREITA */}
           <div className="hidden lg:flex items-center justify-end gap-8 w-5/12 pr-16">
             <a href="#tratamento" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Tratamento</a>
             <a href="#galeria" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Estrutura</a>
             <a href="#unidades" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Unidades</a>
           </div>
 
-          {/* LOGO CENTRO - Ajustado para não cortar */}
+          {/* LOGO CENTRO */}
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10">
              <div className="bg-white lg:px-6 lg:pb-3 lg:pt-3 lg:rounded-b-2xl shadow-lg border border-slate-200 lg:border-t-0 transition-all">
                 <img 
@@ -263,12 +260,12 @@ export default function App() {
         </AnimatePresence>
       </nav>
 
-      {/* 1️⃣ HERO SECTION - COM NOVA IMAGEM E CORREÇÃO DE LAYOUT */}
+      {/* 1️⃣ HERO SECTION - COM ALTURA REDUZIDA PARA 450PX */}
       <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-slate-900 overflow-hidden min-h-[calc(100vh-6rem)] flex items-center">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=2070&auto=format&fit=crop" 
-            alt="Família feliz na natureza" 
+            src="https://images.unsplash.com/photo-1594178056038-f86460166649?q=80&w=2070&auto=format&fit=crop" 
+            alt="Família feliz se abraçando" 
             className="w-full h-full object-cover opacity-30"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent"></div>
@@ -304,16 +301,16 @@ export default function App() {
               </FadeIn>
             </div>
             
+            {/* IMAGEM DIREITA COM ALTURA CORRIGIDA (450px) */}
             <div className="lg:w-1/2 w-full hidden lg:block">
               <FadeIn delay={0.2}>
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-slate-800"> {/* Adicionado bg-slate-800 como reserva */}
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-slate-800">
                   <img 
                     src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=2070&auto=format&fit=crop" 
                     alt="Acolhimento e Paz" 
-                    className="w-full h-[600px] object-cover transition-transform duration-1000 group-hover:scale-105"
+                    className="w-full h-[450px] object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
-                  {/* Ajuste no posicionamento do box de vidro */}
                   <div className="absolute bottom-8 left-8 right-8 glass-panel p-6 rounded-xl flex items-start gap-4 z-20">
                     <div className="bg-teal-500 p-3 rounded-full text-white shadow-lg shadow-teal-500/30">
                       <ShieldCheck size={28} strokeWidth={1.5} />
