@@ -91,18 +91,36 @@ const FadeIn = ({ children, delay = 0 }) => (
   </motion.div>
 );
 
-// --- COMPONENTE CARROSSEL SOFISTICADO ---
+// --- COMPONENTE CARROSSEL SOFISTICADO CORRIGIDO ---
 const GalleryCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxImage, setLightboxImage] = useState(null);
-  const visibleItems = 3; 
+  const [itemsToShow, setItemsToShow] = useState(1);
+
+  // Ajusta quantos itens mostram na tela (Mobile = 1, Desktop = 3)
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsToShow(window.innerWidth >= 768 ? 3 : 1);
+    };
+    handleResize(); // Chama na montagem
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % (galleryImages.length - visibleItems + 1));
+    setCurrentIndex((prev) => {
+      // Se chegou no final, volta pro começo
+      if (prev >= galleryImages.length - itemsToShow) return 0;
+      return prev + 1;
+    });
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
+    setCurrentIndex((prev) => {
+      // Se está no começo, vai pro final
+      if (prev === 0) return galleryImages.length - itemsToShow;
+      return prev - 1;
+    });
   };
 
   return (
@@ -125,13 +143,15 @@ const GalleryCarousel = () => {
       <div className="overflow-hidden">
         <motion.div 
           className="flex gap-6"
-          animate={{ x: `-${currentIndex * (100 / visibleItems)}%` }}
+          animate={{ x: `-${currentIndex * (100 / itemsToShow)}%` }} // Cálculo corrigido
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           {galleryImages.map((img, idx) => (
             <div 
               key={idx} 
-              className="min-w-[100%] md:min-w-[calc(33.333%-16px)] relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer group/item"
+              // Define largura baseada em quantos itens aparecem
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer group/item flex-shrink-0"
+              style={{ width: `calc(${100 / itemsToShow}% - ${(24 * (itemsToShow - 1)) / itemsToShow}px)` }}
               onClick={() => setLightboxImage(img.src)}
             >
               <img src={img.src} alt={img.title} className="w-full h-full object-cover transition-transform duration-700 group-hover/item:scale-110" />
@@ -146,15 +166,13 @@ const GalleryCarousel = () => {
       {/* Setas de Navegação */}
       <button 
         onClick={prevSlide} 
-        disabled={currentIndex === 0}
-        className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 bg-white shadow-xl rounded-full flex items-center justify-center text-slate-800 hover:text-teal-600 disabled:opacity-30 transition-all md:opacity-0 md:group-hover:opacity-100 z-10"
+        className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full flex items-center justify-center text-slate-800 hover:text-teal-600 transition-all opacity-80 hover:opacity-100 z-10"
       >
         <ChevronLeft size={24} />
       </button>
       <button 
         onClick={nextSlide} 
-        disabled={currentIndex >= galleryImages.length - visibleItems}
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 bg-white shadow-xl rounded-full flex items-center justify-center text-slate-800 hover:text-teal-600 disabled:opacity-30 transition-all md:opacity-0 md:group-hover:opacity-100 z-10"
+        className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full flex items-center justify-center text-slate-800 hover:text-teal-600 transition-all opacity-80 hover:opacity-100 z-10"
       >
         <ChevronRight size={24} />
       </button>
@@ -272,13 +290,13 @@ export default function App() {
             <a href="#unidades" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Unidades</a>
           </div>
 
-          {/* LOGO CENTRO */}
+{/* LOGO CENTRO (Ajustada para Mobile) */}
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10">
-             <div className="bg-white lg:px-6 lg:pb-3 lg:pt-3 lg:rounded-b-2xl shadow-lg border border-slate-200 lg:border-t-0 transition-all">
+             <div className="bg-white px-4 pb-2 pt-2 rounded-b-xl lg:px-6 lg:pb-3 lg:pt-3 lg:rounded-b-2xl shadow-lg border border-slate-200 border-t-0 transition-all">
                 <img 
                   src="https://cdn.agsup.com.br/grv/logo.png" 
                   alt="Grupo Restaura Vidas" 
-                  className="h-12 w-auto lg:h-24 lg:w-auto object-contain transition-all duration-300"
+                  className="h-16 w-auto lg:h-24 lg:w-auto object-contain transition-all duration-300"
                 />
              </div>
           </div>
@@ -823,6 +841,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
