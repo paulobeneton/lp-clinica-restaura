@@ -7,7 +7,7 @@ import {
   Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, ZoomIn
 } from 'lucide-react';
 
-// --- ÍCONE WHATSAPP OFICIAL (Vetorizado) ---web
+// --- ÍCONE WHATSAPP OFICIAL (Vetorizado) ---
 const WhatsAppIcon = ({ className }) => (
   <svg 
     viewBox="0 0 24 24" 
@@ -91,7 +91,7 @@ const FadeIn = ({ children, delay = 0 }) => (
   </motion.div>
 );
 
-// --- COMPONENTE CARROSSEL SOFISTICADO CORRIGIDO ---
+// --- COMPONENTE CARROSSEL ---
 const GalleryCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxImage, setLightboxImage] = useState(null);
@@ -109,7 +109,6 @@ const GalleryCarousel = () => {
 
   const nextSlide = () => {
     setCurrentIndex((prev) => {
-      // Se chegou no final, volta pro começo
       if (prev >= galleryImages.length - itemsToShow) return 0;
       return prev + 1;
     });
@@ -117,7 +116,6 @@ const GalleryCarousel = () => {
 
   const prevSlide = () => {
     setCurrentIndex((prev) => {
-      // Se está no começo, vai pro final
       if (prev === 0) return galleryImages.length - itemsToShow;
       return prev - 1;
     });
@@ -125,7 +123,6 @@ const GalleryCarousel = () => {
 
   return (
     <div className="relative w-full max-w-7xl mx-auto px-4 md:px-8 group">
-      {/* Lightbox */}
       <AnimatePresence>
         {lightboxImage && (
           <motion.div 
@@ -139,17 +136,15 @@ const GalleryCarousel = () => {
         )}
       </AnimatePresence>
 
-      {/* Carrossel Container */}
       <div className="overflow-hidden">
         <motion.div 
           className="flex gap-6"
-          animate={{ x: `-${currentIndex * (100 / itemsToShow)}%` }} // Cálculo corrigido
+          animate={{ x: `-${currentIndex * (100 / itemsToShow)}%` }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           {galleryImages.map((img, idx) => (
             <div 
               key={idx} 
-              // Define largura baseada em quantos itens aparecem
               className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer group/item flex-shrink-0"
               style={{ width: `calc(${100 / itemsToShow}% - ${(24 * (itemsToShow - 1)) / itemsToShow}px)` }}
               onClick={() => setLightboxImage(img.src)}
@@ -163,19 +158,8 @@ const GalleryCarousel = () => {
         </motion.div>
       </div>
 
-      {/* Setas de Navegação */}
-      <button 
-        onClick={prevSlide} 
-        className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full flex items-center justify-center text-slate-800 hover:text-teal-600 transition-all opacity-80 hover:opacity-100 z-10"
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <button 
-        onClick={nextSlide} 
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full flex items-center justify-center text-slate-800 hover:text-teal-600 transition-all opacity-80 hover:opacity-100 z-10"
-      >
-        <ChevronRight size={24} />
-      </button>
+      <button onClick={prevSlide} className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full flex items-center justify-center text-slate-800 hover:text-teal-600 transition-all opacity-80 hover:opacity-100 z-10"><ChevronLeft size={24} /></button>
+      <button onClick={nextSlide} className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full flex items-center justify-center text-slate-800 hover:text-teal-600 transition-all opacity-80 hover:opacity-100 z-10"><ChevronRight size={24} /></button>
     </div>
   );
 };
@@ -210,8 +194,8 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   
-  // ESTADOS DO FORMULÁRIO
-  const [formData, setFormData] = useState({ name: '', phone: '', subject: 'Internação para Drogas' });
+  // ESTADOS DO FORMULÁRIO (Agora com Cidade)
+  const [formData, setFormData] = useState({ name: '', phone: '', city: '', subject: 'Internação para Drogas' });
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState(null);
 
@@ -224,7 +208,7 @@ export default function App() {
 
   const scrollToForm = () => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
   
-  // Link Geral para o botão flutuante e topo
+  // Link Geral
   const handleWhatsApp = (text = '') => window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
   
   // Função de Ligar
@@ -236,7 +220,8 @@ export default function App() {
     setIsSending(true);
     setStatus(null);
 
-    const whatsappText = `Olá, me chamo *${formData.name}*. Gostaria de informações sobre *${formData.subject}*. Meu telefone é ${formData.phone}.`;
+    // Mensagem WhatsApp agora inclui a cidade
+    const whatsappText = `Olá, me chamo *${formData.name}*, sou de *${formData.city}*. Gostaria de informações sobre *${formData.subject}*. Meu telefone é ${formData.phone}.`;
 
     try {
       // 1. Envia para o Webhook
@@ -259,7 +244,7 @@ export default function App() {
       // 3. Redireciona para o WhatsApp
       setTimeout(() => {
          handleWhatsApp(whatsappText);
-         setFormData({ name: '', phone: '', subject: 'Internação para Drogas' });
+         setFormData({ name: '', phone: '', city: '', subject: 'Internação para Drogas' });
          setStatus(null);
       }, 2000);
 
@@ -290,7 +275,7 @@ export default function App() {
             <a href="#unidades" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Unidades</a>
           </div>
 
-{/* LOGO CENTRO (Ajustada para Mobile) */}
+          {/* LOGO CENTRO (Ajuste Mobile) */}
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10">
              <div className="bg-white px-4 pb-2 pt-2 rounded-b-xl lg:px-6 lg:pb-3 lg:pt-3 lg:rounded-b-2xl shadow-lg border border-slate-200 border-t-0 transition-all">
                 <img 
@@ -383,13 +368,13 @@ export default function App() {
               </FadeIn>
             </div>
             
-            {/* IMAGEM DIREITA */}
+            {/* IMAGEM DIREITA COM ALTURA CORRIGIDA (450px) */}
             <div className="lg:w-1/2 w-full hidden lg:block">
               <FadeIn delay={0.2}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-slate-800">
                   <img 
                     src="https://cdn.agsup.com.br/grv/imagem-clinica.jpeg?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Ambiente de Paz" 
+                    alt="Acolhimento e Paz" 
                     className="w-full h-[450px] object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
@@ -603,7 +588,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 7️⃣ UNIDADES (ATUALIZADO COM LINKS DE WHATSAPP) */}
+      {/* 7️⃣ UNIDADES */}
       <Section id="unidades" className="bg-white border-t border-slate-100">
          <div className="container mx-auto">
            <div className="text-center mb-16">
@@ -622,7 +607,7 @@ export default function App() {
                 },
                 { 
                   title: "Unidade Três Pontas",
-                  img: "https://cdn.agsup.com.br/grv/unidade-paraguacu.jpeg?q=80&w=800", 
+                  img: "https://cdn.agsup.com.br/grv/unidade-tres-pontas.jpeg?q=80&w=800", 
                   address: "Estrada Principal - Três Pontas, MG",
                   phone: "(35) 99972-6322",
                   whatsappLink: "https://agsup.click/clinica-tres-pontas"
@@ -663,7 +648,6 @@ export default function App() {
                           <button onClick={handleCall} className="flex items-center justify-center gap-2 w-full text-white font-medium py-2 hover:text-teal-400 transition">
                              <Phone size={16} /> Ligar Agora
                           </button>
-                          {/* BOTÃO WHATSAPP ESPECÍFICO DA UNIDADE */}
                           <Button variant="whatsapp" onClick={() => window.open(unit.whatsappLink, '_blank')} className="w-full py-3 text-sm flex justify-center gap-2 shadow-none">
                              <WhatsAppIcon className="w-5 h-5" /> Falar no WhatsApp
                           </Button>
@@ -713,9 +697,9 @@ export default function App() {
           <h2 className="text-4xl font-bold text-slate-900 mb-16">Histórias de Transformação</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { text: "Chegar à clínica foi um dos momentos mais difíceis da minha vida, mas o atendimento que recebi desde o primeiro dia me fez sentir acolhido de verdade. Não era só mais um paciente – me trataram com respeito, empatia e paciência. Isso fez toda a diferença para eu confiar no processo e seguir firme no tratamento", author: "Recuperado do vício em drogas.", role: "Drogas" },
-              { text: "O que mais me marcou foi o apoio constante da equipe de psicólogos, terapeutas e médicos. Eles não apenas aplicam o tratamento, mas escutam, orientam e acompanham cada passo. Senti que não estava sozinho em nenhum momento. Esse suporte humano foi essencial para minha recuperação.", author: "Recuperado do vício em bebidas", role: "Vício em Bebidas" },
-              { text: "A estrutura da clínica é excelente, com espaços tranquilos, atividades terapêuticas e tudo voltado para o bem-estar. Mas o que realmente me surpreendeu foi o preparo dos profissionais – todos muito comprometidos, experientes e humanos. O ambiente foi fundamental para eu me reconectar comigo mesmo.", author: "Recuperado do vício em jogos (apostas)", role: "Jogos / Apostas" }
+              { text: "Eu achava que não tinha mais jeito. A clínica não só salvou minha vida, como devolveu minha família.", author: "Carlos M.", role: "Em recuperação" },
+              { text: "O atendimento humanizado fez toda a diferença. Não fui tratado como um problema, mas como alguém que precisava de ajuda.", author: "Ricardo S.", role: "Ex-paciente" },
+              { text: "Internar meu filho foi difícil, mas foi a melhor decisão. Hoje ele é outra pessoa, cheio de vida.", author: "Maria Helena", role: "Mãe" }
             ].map((depo, idx) => (
               <FadeIn key={idx} delay={idx * 0.1}>
                 <div className="bg-slate-50 p-10 rounded-t-3xl rounded-br-3xl rounded-bl-none border border-slate-100 text-left hover:shadow-lg transition relative h-full flex flex-col">
@@ -780,29 +764,65 @@ export default function App() {
 
             {/* Lado Direito (Formulário) */}
             <div className="lg:w-7/12 p-12 bg-white">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">Entre em contato</h3>
-              <p className="text-slate-500 mb-8 font-light">Preencha os dados abaixo e entramos em contato pelo WhatsApp.</p>
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">Solicite uma Ligação</h3>
+              <p className="text-slate-500 mb-8 font-light">Preencha os dados abaixo e ligamos para você em instantes.</p>
               
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Nome</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" placeholder="Seu nome" required />
+                    <input 
+                      type="text" 
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" 
+                      placeholder="Seu nome" 
+                      required
+                    />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Telefone</label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" placeholder="(DDD) 99999-9999" required />
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" 
+                      placeholder="(DDD) 99999-9999" 
+                      required
+                    />
                   </div>
                 </div>
-                <div>
-                   <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Como podemos ajudar?</label>
-                   <select name="subject" value={formData.subject} onChange={handleChange} className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition text-slate-600">
-                      <option>Internação para Drogas</option>
-                      <option>Internação para Álcool</option>
-                      <option>Vício em Jogos</option>
-                      <option>Outros</option>
-                   </select>
+                <div className="grid md:grid-cols-2 gap-5">
+                   <div>
+                       <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Cidade</label>
+                       <input 
+                          type="text" 
+                          name="city"
+                          value={formData.city}
+                          onChange={handleChange}
+                          className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition" 
+                          placeholder="Sua cidade" 
+                          required
+                       />
+                   </div>
+                   <div>
+                       <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Como podemos ajudar?</label>
+                       <select 
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          className="w-full p-4 bg-slate-50 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition text-slate-600"
+                       >
+                          <option>Internação para Drogas</option>
+                          <option>Internação para Álcool</option>
+                          <option>Vício em Jogos</option>
+                          <option>Outros</option>
+                       </select>
+                   </div>
                 </div>
+                
                 <Button variant="whatsapp" className="w-full py-5 text-lg shadow-xl shadow-green-500/20 flex justify-center items-center gap-3 disabled:opacity-70" disabled={isSending}>
                    {isSending ? (
                      <>Enviando...</>
@@ -810,8 +830,19 @@ export default function App() {
                      <><WhatsAppIcon className="w-6 h-6" /> SOLICITAR AJUDA AGORA</>
                    )}
                 </Button>
-                {status === 'success' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-green-50 text-green-700 rounded-lg text-center border border-green-100"><p className="font-bold">Solicitação Recebida!</p><p className="text-sm">Nossa equipe entrará em contato. Redirecionando para WhatsApp...</p></motion.div>}
-                {status === 'error' && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-red-50 text-red-700 rounded-lg text-center border border-red-100"><p>Erro ao enviar. Por favor, clique no botão flutuante do WhatsApp.</p></motion.div>}
+
+                {/* Mensagens de Status */}
+                {status === 'success' && (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-green-50 text-green-700 rounded-lg text-center border border-green-100">
+                     <p className="font-bold">Solicitação Recebida!</p>
+                     <p className="text-sm">Nossa equipe entrará em contato. Redirecionando para WhatsApp...</p>
+                  </motion.div>
+                )}
+                {status === 'error' && (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-red-50 text-red-700 rounded-lg text-center border border-red-100">
+                     <p>Erro ao enviar. Por favor, clique no botão flutuante do WhatsApp.</p>
+                  </motion.div>
+                )}
               </form>
             </div>
 
@@ -841,9 +872,3 @@ export default function App() {
     </div>
   );
 }
-
-
-
-
-
-
