@@ -38,20 +38,28 @@ const GlobalStyles = () => (
 // --- DADOS DA GALERIA ---
 const galleryImages = [
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-01.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-trespontas01.jpg?q=80&w=800", title: "Unidade Três Pontas" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-02.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-03.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-trespontas02.jpg?q=80&w=800", title: "Unidade Três Pontas" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-04.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-05.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-trespontas03.jpg?q=80&w=800", title: "Unidade Três Pontas" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-06.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-07.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-08.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-trespontas04.jpg?q=80&w=800", title: "Unidade Três Pontas" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-09.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-10.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-trespontas05.jpg?q=80&w=800", title: "Unidade Três Pontas" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-11.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-12.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-trespontas06.jpg?q=80&w=800", title: "Unidade Três Pontas" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-13.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-14.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-trespontas07.jpg?q=80&w=800", title: "Unidade Três Pontas" },
   { src: "https://cdn.agsup.com.br/grv/unidade-paraguacu-15.jpg?q=80&w=800", title: "Unidade Paraguaçu" },
+  { src: "https://cdn.agsup.com.br/grv/unidade-trespontas01.jpg?q=80&w=800", title: "Unidade Três Pontas" },
 ];
 
 // --- COMPONENTES UI ---
@@ -876,6 +884,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
