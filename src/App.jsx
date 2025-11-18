@@ -4,7 +4,7 @@ import {
   Phone, MapPin, Clock, Heart, ShieldCheck, 
   Activity, Users, ArrowRight, CheckCircle2, Menu, X, Star,
   MessageCircle, ChevronDown, ChevronLeft, ChevronRight, Home, Lock, Stethoscope, 
-  Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, ZoomIn, Calendar
+  Utensils, Brain, Leaf, AlertTriangle, Coins, Pill, Wine, Search, ZoomIn
 } from 'lucide-react';
 
 // --- CONFIGURAÇÃO GLOBAL & FONTES ---
@@ -42,7 +42,6 @@ const Button = ({ children, variant = 'primary', className = '', onClick, ...pro
     primary: "bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-700 text-white shadow-orange-500/25 transform hover:-translate-y-0.5", 
     secondary: "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20",
     outline: "border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm",
-    outlineDark: "border border-slate-700 text-slate-300 hover:border-white hover:text-white hover:bg-white/5",
     ghost: "text-slate-600 hover:text-teal-700 hover:bg-teal-50 font-semibold shadow-none rounded-lg px-4",
     headerCall: "bg-teal-600 hover:bg-teal-700 text-white shadow-teal-600/20 px-6 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transform hover:-translate-y-0.5"
   };
@@ -95,7 +94,6 @@ const GalleryCarousel = () => {
 
   return (
     <div className="relative w-full max-w-7xl mx-auto px-4 md:px-8 group">
-      {/* Lightbox */}
       <AnimatePresence>
         {lightboxImage && (
           <motion.div 
@@ -109,7 +107,6 @@ const GalleryCarousel = () => {
         )}
       </AnimatePresence>
 
-      {/* Carrossel Container */}
       <div className="overflow-hidden">
         <motion.div 
           className="flex gap-6"
@@ -131,7 +128,6 @@ const GalleryCarousel = () => {
         </motion.div>
       </div>
 
-      {/* Setas de Navegação */}
       <button 
         onClick={prevSlide} 
         disabled={currentIndex === 0}
@@ -193,13 +189,11 @@ export default function App() {
         <div className="container mx-auto px-6 h-24 flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="bg-teal-600 p-2.5 rounded-xl shadow-lg shadow-teal-600/20">
-              <Heart className="text-white h-6 w-6" strokeWidth={2} />
-            </div>
-            <div className="leading-tight">
-              <h1 className="text-2xl font-bold text-slate-900 tracking-tight">RESTAURA</h1>
-              <span className="text-[10px] font-bold text-teal-600 tracking-[0.2em] uppercase block pl-0.5">Vidas</span>
-            </div>
+             <img 
+              src="https://cdn.agsup.com.br/grv/logo.png" 
+              alt="Grupo Restaura Vidas" 
+              className="h-16 w-auto object-contain"
+            />
           </div>
 
           {/* Menu Desktop */}
@@ -365,7 +359,7 @@ export default function App() {
         </FadeIn>
       </Section>
 
-      {/* 4️⃣ JORNADA DE TRATAMENTO (BOXES ALINHADOS) */}
+      {/* 4️⃣ JORNADA DE TRATAMENTO */}
       <Section id="tratamento" bg="gray">
         <div className="container mx-auto">
           <div className="text-center mb-20">
@@ -416,8 +410,93 @@ export default function App() {
          <GalleryCarousel />
       </Section>
 
-      {/* 6️⃣ UNIDADES (RESTAURADA e PREMIUM) */}
-      <Section id="unidades" className="bg-white">
+      {/* 6️⃣ EXCELÊNCIA NO CUIDADO (EM BLOCOS SEPARADOS E VALORIZADOS) */}
+      <Section id="equipe" bg="white">
+        <div className="container mx-auto">
+           <div className="text-center mb-20">
+            <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Alto Padrão</span>
+            <h2 className="text-4xl font-bold text-slate-900 mt-3 mb-4">Excelência no Cuidado</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {/* Bloco 1: Equipe */}
+            <FadeIn delay={0.1}>
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+                <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-600 transition-colors duration-300">
+                   <Stethoscope size={32} className="text-teal-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Equipe Técnica</h3>
+                <ul className="space-y-4">
+                  {["Psiquiatra", "Psicóloga", "Enfermeira Padrão", "Terapeutas 24h", "Coordenadores"].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-slate-600 font-medium">
+                      <div className="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center text-teal-600">
+                         <CheckCircle2 size={14} />
+                      </div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+
+            {/* Bloco 2: Terapias */}
+            <FadeIn delay={0.2}>
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+                <div className="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-orange-500 transition-colors duration-300">
+                   <Brain size={32} className="text-orange-500 group-hover:text-white transition-colors" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Terapias</h3>
+                <div className="space-y-5">
+                  <div>
+                     <strong className="text-slate-900 block mb-1 text-lg">P.P.R</strong>
+                     <span className="text-slate-500 text-sm font-light block">Prevenção a Recaída e ferramentas para a vida.</span>
+                  </div>
+                  <div>
+                     <strong className="text-slate-900 block mb-1 text-lg">T.R.E</strong>
+                     <span className="text-slate-500 text-sm font-light block">Terapia Racional Emotiva e sentimentos.</span>
+                  </div>
+                  <div>
+                     <strong className="text-slate-900 block mb-1 text-lg">Laborterapia</strong>
+                     <span className="text-slate-500 text-sm font-light block">Disciplina e resgate da autoestima.</span>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Bloco 3: Rotina */}
+            <FadeIn delay={0.3}>
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+                <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-green-600 transition-colors duration-300">
+                   <Utensils size={32} className="text-green-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Rotina Diária</h3>
+                <div className="mb-8">
+                  <h4 className="font-bold text-slate-700 text-sm mb-3 uppercase tracking-wider">Alimentação Balanceada</h4>
+                  <div className="grid grid-cols-2 gap-2 text-xs font-medium text-slate-600">
+                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Café da Manhã</span>
+                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Almoço</span>
+                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Café da Tarde</span>
+                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Jantar</span>
+                  </div>
+                </div>
+                <div>
+                   <h4 className="font-bold text-slate-700 text-sm mb-3 uppercase tracking-wider">Atividades</h4>
+                   <div className="flex flex-wrap gap-2">
+                      <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Espiritualidade</span>
+                      <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Educação Física</span>
+                      <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Reuniões N.A.</span>
+                   </div>
+                </div>
+              </div>
+            </FadeIn>
+
+          </div>
+        </div>
+      </Section>
+
+      {/* 7️⃣ UNIDADES (RESTAURADA e PREMIUM) */}
+      <Section id="unidades" className="bg-white border-t border-slate-100">
          <div className="container mx-auto">
            <div className="text-center mb-16">
              <span className="text-teal-600 font-bold uppercase tracking-widest text-xs">Presença Nacional</span>
@@ -485,93 +564,8 @@ export default function App() {
          </div>
       </Section>
 
-      {/* 7️⃣ EXCELÊNCIA NO CUIDADO (EM BLOCOS) */}
-      <Section id="excelencia" bg="gray">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-             <h2 className="text-4xl font-bold text-slate-900">Excelência no Cuidado</h2>
-             <p className="text-slate-500 mt-2">Padrão ouro em reabilitação</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            {/* Bloco Equipe Técnica */}
-            <FadeIn delay={0.1}>
-              <div className="bg-white p-10 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
-                <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-teal-600 transition-colors duration-300">
-                   <Stethoscope size={32} className="text-teal-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Equipe Técnica</h3>
-                <ul className="space-y-4">
-                  {["Psiquiatra", "Psicóloga", "Enfermeira Padrão", "Terapeutas 24h", "Coordenadores"].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-slate-600 font-medium">
-                      <div className="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center text-teal-600">
-                         <CheckCircle2 size={14} />
-                      </div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
-
-            {/* Bloco Terapias */}
-            <FadeIn delay={0.2}>
-              <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
-                <div className="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-orange-500 transition-colors duration-300">
-                   <Brain size={32} className="text-orange-500 group-hover:text-white transition-colors" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Terapias</h3>
-                <div className="space-y-5">
-                  <div>
-                     <strong className="text-slate-900 block mb-1 text-lg">P.P.R</strong>
-                     <span className="text-slate-500 text-sm font-light block">Prevenção a Recaída e ferramentas para a vida.</span>
-                  </div>
-                  <div>
-                     <strong className="text-slate-900 block mb-1 text-lg">T.R.E</strong>
-                     <span className="text-slate-500 text-sm font-light block">Terapia Racional Emotiva e sentimentos.</span>
-                  </div>
-                  <div>
-                     <strong className="text-slate-900 block mb-1 text-lg">Laborterapia</strong>
-                     <span className="text-slate-500 text-sm font-light block">Disciplina e resgate da autoestima.</span>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Bloco Rotina */}
-            <FadeIn delay={0.3}>
-              <div className="bg-white p-8 rounded-3xl border border-slate-100 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
-                <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-green-600 transition-colors duration-300">
-                   <Utensils size={32} className="text-green-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Rotina Diária</h3>
-                <div className="mb-8">
-                  <h4 className="font-bold text-slate-700 text-sm mb-3 uppercase tracking-wider">Alimentação Balanceada</h4>
-                  <div className="grid grid-cols-2 gap-2 text-xs font-medium text-slate-600">
-                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Café da Manhã</span>
-                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Almoço</span>
-                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Café da Tarde</span>
-                    <span className="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 text-center">Jantar</span>
-                  </div>
-                </div>
-                <div>
-                   <h4 className="font-bold text-slate-700 text-sm mb-3 uppercase tracking-wider">Atividades</h4>
-                   <div className="flex flex-wrap gap-2">
-                      <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Espiritualidade</span>
-                      <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Educação Física</span>
-                      <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Reuniões N.A.</span>
-                   </div>
-                </div>
-              </div>
-            </FadeIn>
-
-          </div>
-        </div>
-      </Section>
-
       {/* 8️⃣ POR QUE NOS ESCOLHER */}
-      <Section id="diferenciais" bg="white">
+      <Section id="diferenciais" bg="gray">
         <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">Por Que Nos Escolher</h2>
@@ -588,7 +582,7 @@ export default function App() {
               { icon: <ShieldCheck size={28} />, title: "Equipe Experiente", desc: "Profissionais com +10 anos de experiência." },
             ].map((item, idx) => (
               <FadeIn key={idx} delay={idx * 0.1}>
-                <div className="bg-slate-50 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 group">
+                <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 group">
                     <div className="w-14 h-14 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                       {React.cloneElement(item.icon, { strokeWidth: 1.5 })}
                     </div>
@@ -602,7 +596,7 @@ export default function App() {
       </Section>
 
       {/* 9️⃣ DEPOIMENTOS */}
-      <Section id="depoimentos" bg="gray">
+      <Section id="depoimentos" bg="white">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl font-bold text-slate-900 mb-16">Histórias de Transformação</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -612,7 +606,7 @@ export default function App() {
               { text: "Internar meu filho foi difícil, mas foi a melhor decisão. Hoje ele é outra pessoa, cheio de vida.", author: "Maria Helena", role: "Mãe" }
             ].map((depo, idx) => (
               <FadeIn key={idx} delay={idx * 0.1}>
-                <div className="bg-white p-10 rounded-t-3xl rounded-br-3xl rounded-bl-none border border-slate-100 text-left hover:shadow-lg transition relative h-full flex flex-col">
+                <div className="bg-slate-50 p-10 rounded-t-3xl rounded-br-3xl rounded-bl-none border border-slate-100 text-left hover:shadow-lg transition relative h-full flex flex-col">
                   <div className="flex gap-1 mb-6 text-orange-400">
                     {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
                   </div>
@@ -719,7 +713,7 @@ export default function App() {
       </footer>
 
       {/* Botão Flutuante WhatsApp */}
-      <a href="https://wa.me/5535999726322" target="_blank" className="fixed bottom-6 right-6 z-50 hover:-translate-y-1 transition-transform">
+      <a href="https://wa.me/5511999999999" target="_blank" className="fixed bottom-6 right-6 z-50 hover:-translate-y-1 transition-transform">
         <div className="bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full shadow-2xl shadow-green-500/30 flex items-center justify-center">
           <MessageCircle size={32} fill="currentColor" />
         </div>
