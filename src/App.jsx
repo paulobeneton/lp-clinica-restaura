@@ -601,7 +601,7 @@ export default function App() {
               {[
                 { 
                   title: "Unidade Três Pontas",
-                  img: "https://cdn.agsup.com.br/grv/unidade-tres-pontas.jpeg?q=80&w=800", 
+                  img: "https://cdn.agsup.com.br/grv/unidade-trespontas.jpeg?q=80&w=800", 
                   address: "Condomínio Chácaras do Lago - Três Pontas, MG",
                   phone: "(35) 99972-6322",
                   whatsappLink: "https://agsup.click/clinica-tres-pontas"
@@ -867,5 +867,6 @@ export default function App() {
     </div>
   );
 }
+
 
 
