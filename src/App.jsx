@@ -91,7 +91,7 @@ const FadeIn = ({ children, delay = 0 }) => (
   </motion.div>
 );
 
-// --- COMPONENTE CARROSSEL SOFISTICADO ---
+// --- COMPONENTE CARROSSEL ---
 const GalleryCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxImage, setLightboxImage] = useState(null);
@@ -189,9 +189,13 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   
+  // TELEFONE PRINCIPAL (EVANDRO)
+  const phoneNumber = "5535999726322";
+  const displayPhone = "(35) 99972-6322";
+
   const scrollToForm = () => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
-  const handleWhatsApp = (text = '') => window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(text)}`, '_blank');
-  const handleCall = () => window.open('tel:08001234567', '_self');
+  const handleWhatsApp = (text = '') => window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
+  const handleCall = () => window.open(`tel:${phoneNumber}`, '_self');
 
   return (
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
@@ -223,7 +227,7 @@ export default function App() {
           <div className="hidden lg:flex items-center justify-start gap-8 w-5/12 pl-16">
              <div className="text-right">
                <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
-               <a href="tel:08001234567" className="text-xl font-bold text-slate-900 hover:text-teal-600 transition font-mono">0800 123 4567</a>
+               <a href={`tel:${phoneNumber}`} className="text-xl font-bold text-slate-900 hover:text-teal-600 transition font-mono">{displayPhone}</a>
              </div>
              <Button variant="whatsapp" onClick={() => handleWhatsApp()}>
                <WhatsAppIcon className="w-5 h-5" /> WhatsApp
@@ -250,7 +254,7 @@ export default function App() {
               <a href="#galeria" onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "'Funnel Display', sans-serif" }} className="py-3 px-4 text-lg text-slate-700 hover:bg-slate-50 rounded-lg font-medium">Estrutura</a>
               <div className="py-2 px-4 border-t border-slate-100 mt-2">
                  <p className="text-xs text-slate-400 uppercase font-bold">Emergência</p>
-                 <p className="text-lg font-bold text-slate-900">0800 123 4567</p>
+                 <p className="text-lg font-bold text-slate-900">{displayPhone}</p>
               </div>
               <Button variant="whatsapp" onClick={() => handleWhatsApp()} className="w-full mt-2 flex justify-center gap-2">
                  <WhatsAppIcon className="w-5 h-5" /> WhatsApp
@@ -260,7 +264,7 @@ export default function App() {
         </AnimatePresence>
       </nav>
 
-      {/* 1️⃣ HERO SECTION - COM ALTURA REDUZIDA PARA 450PX */}
+      {/* 1️⃣ HERO SECTION */}
       <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-slate-900 overflow-hidden min-h-[calc(100vh-6rem)] flex items-center">
         <div className="absolute inset-0 z-0">
           <img 
@@ -301,7 +305,6 @@ export default function App() {
               </FadeIn>
             </div>
             
-            {/* IMAGEM DIREITA COM ALTURA CORRIGIDA (450px) */}
             <div className="lg:w-1/2 w-full hidden lg:block">
               <FadeIn delay={0.2}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group bg-slate-800">
@@ -395,7 +398,6 @@ export default function App() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 relative items-stretch">
-             {/* Linha Conectora */}
              <div className="hidden md:block absolute top-10 left-0 w-full h-0.5 bg-slate-200 -z-10"></div>
 
             <FadeIn delay={0.1}>
@@ -533,22 +535,22 @@ export default function App() {
            <div className="grid md:grid-cols-3 gap-8">
               {[
                 { 
-                  title: "Unidade São Paulo - Centro",
+                  title: "Unidade Varginha",
                   img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800", 
-                  address: "Rua das Flores, 123 - Centro, São Paulo - SP",
-                  phone: "(11) 98765-4321"
+                  address: "Zona Rural - Varginha, MG",
+                  phone: "(35) 99972-6322"
                 },
                 { 
-                  title: "Unidade Rio de Janeiro - Zona Sul",
+                  title: "Unidade Três Pontas",
                   img: "https://images.unsplash.com/photo-1600596542815-60002555619f?q=80&w=800", 
-                  address: "Av. Atlântica, 456 - Copacabana, Rio de Janeiro - RJ",
-                  phone: "(21) 98765-1234"
+                  address: "Estrada Principal - Três Pontas, MG",
+                  phone: "(35) 99972-6322"
                 },
                 { 
-                  title: "Unidade Belo Horizonte - Savassi",
+                  title: "Unidade Paraguaçu",
                   img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800", 
-                  address: "Rua da Bahia, 789 - Savassi, Belo Horizonte - MG",
-                  phone: "(31) 98765-5678"
+                  address: "Área Verde - Paraguaçu, MG",
+                  phone: "(35) 99972-6322"
                 }
               ].map((unit, i) => (
                 <FadeIn key={i} delay={i * 0.1}>
@@ -670,7 +672,7 @@ export default function App() {
                       </div>
                       <div>
                         <p className="text-xs text-slate-400 uppercase font-bold tracking-wider">Plantão 24h</p>
-                        <p className="text-xl font-bold">0800 123 4567</p>
+                        <p className="text-xl font-bold">{displayPhone}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
@@ -679,7 +681,7 @@ export default function App() {
                       </div>
                       <div>
                         <p className="text-xs text-slate-400 uppercase font-bold tracking-wider">WhatsApp</p>
-                        <p className="text-xl font-bold">(11) 99999-9999</p>
+                        <p className="text-xl font-bold">{displayPhone}</p>
                       </div>
                     </div>
                   </div>
@@ -730,17 +732,21 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="bg-slate-950 text-slate-400 py-12 text-sm border-t border-slate-800">
-        <div className="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Heart className="text-teal-600" fill="currentColor" size={20} />
-              <span className="font-bold text-white text-lg tracking-tight">GRUPO RESTAURA VIDAS</span>
+        <div className="container mx-auto px-6 flex flex-col items-center gap-6">
+            {/* Ícone da Logo Apenas */}
+            <div className="flex items-center justify-center gap-2">
+              <Heart className="text-teal-600" fill="currentColor" size={24} />
             </div>
-            <p className="font-light opacity-70">© 2025 Todos os direitos reservados.</p>
+            
+            {/* Créditos Supimpa */}
+            <p className="text-center text-xs text-slate-500">
+               Grupo Restaura Vidas {new Date().getFullYear()} - Feito com <span style={{color: 'red'}}>❤</span> pelo time da <a title="Gostou? Podemos ajudar sua empresa também! Entre em contato" href="https://agenciasupimpa.com.br?utm_source=gruporestauravida&amp;utm_id=clientes" target="_blank" rel="noopener" className="hover:text-teal-500 transition"><b>SUPIMPA</b> - Agência Digital</a>
+            </p>
         </div>
       </footer>
 
       {/* Botão Flutuante WhatsApp */}
-      <a href="https://wa.me/5511999999999" target="_blank" className="fixed bottom-6 right-6 z-50 hover:-translate-y-1 transition-transform">
+      <a href={`https://wa.me/${phoneNumber}`} target="_blank" className="fixed bottom-6 right-6 z-50 hover:-translate-y-1 transition-transform">
         <div className="bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full shadow-2xl shadow-green-500/30 flex items-center justify-center">
            <WhatsAppIcon className="w-8 h-8" />
         </div>
