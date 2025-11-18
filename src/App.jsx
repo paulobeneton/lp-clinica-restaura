@@ -540,19 +540,19 @@ export default function App() {
               {[
                 { 
                   title: "Unidade Varginha",
-                  img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800", 
+                  img: "https://cdn.agsup.com.br/grv/unidade-varginha.jpeg?q=80&w=800", 
                   address: "Zona Rural - Varginha, MG",
                   phone: "(35) 99972-6322"
                 },
                 { 
                   title: "Unidade Três Pontas",
-                  img: "https://images.unsplash.com/photo-1600596542815-60002555619f?q=80&w=800", 
+                  img: "https://cdn.agsup.com.br/grv/unidade-paraguacu.jpeg?q=80&w=800", 
                   address: "Estrada Principal - Três Pontas, MG",
                   phone: "(35) 99972-6322"
                 },
                 { 
                   title: "Unidade Paraguaçu",
-                  img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800", 
+                  img: "https://cdn.agsup.com.br/grv/unidade-paraguacu.jpeg?q=80&w=800", 
                   address: "Área Verde - Paraguaçu, MG",
                   phone: "(35) 99972-6322"
                 }
@@ -756,4 +756,5 @@ export default function App() {
     </div>
   );
 }
+
 
