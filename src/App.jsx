@@ -202,7 +202,7 @@ export default function App() {
   
   // ⚠️ COLOQUE AQUI O LINK DO SEU WEBHOOK (n8n, Typebot, etc)
   // Se não tiver, deixe as aspas vazias "" que ele vai direto pro WhatsApp
-  const WEBHOOK_URL = "";
+  const WEBHOOK_URL = "https://n8n.agsup.click/webhook-test/clinica-recuperacao";
   
   // TELEFONE PRINCIPAL (EVANDRO)
   const phoneNumber = "5535999726322";
@@ -842,5 +842,6 @@ export default function App() {
     </div>
   );
 }
+
 
 
