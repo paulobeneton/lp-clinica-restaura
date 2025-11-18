@@ -611,7 +611,7 @@ export default function App() {
                 },
                 { 
                   title: "Unidade Paraguaçu",
-                  img: "https://cdn.agsup.com.br/grv/unidade-paraguacu.jpeg?q=80&w=800", 
+                  img: "https://cdn.agsup.com.br/grv/unidade-tres-pontas.jpeg?q=80&w=800", 
                   address: "Área Verde - Paraguaçu, MG",
                   phone: "(35) 99972-6322",
                   whatsappLink: "https://agsup.click/clinica-paraguacu"
@@ -823,6 +823,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
