@@ -281,27 +281,27 @@ export default function App() {
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
       
-      {/* HEADER - LOGO LIMPA E CENTRALIZADA */}
+            {/* HEADER - LOGO LIMPA E CENTRALIZADA COM ESPAÇAMENTO AJUSTADO */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm h-24 transition-all duration-300">
         <div className="container mx-auto px-6 h-full flex justify-between items-center relative">
           
-          {/* LOGO LIMPA CENTRALIZADA (Sem box branco, sem sombra, sem borda) */}
-          <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10 h-full items-center">
-             <img 
-               src="https://cdn.agsup.com.br/grv/2025-logo-grupo-restaura-vidas.png" 
-               alt="Grupo Restaura Vidas" 
-               className="h-16 lg:h-28 w-auto object-contain transition-all duration-300 mt-2" // Aumentada e com margem superior leve
-             />
-          </div>
-
-          {/* MENU ESQUERDA (ALINHADO À DIREITA DO BLOCO, PERTO DA LOGO) */}
+          {/* LADO ESQUERDO: MENU ALINHADO À DIREITA (Próximo da Logo) */}
           <div className="hidden lg:flex items-center justify-end gap-6 w-5/12 pr-12">
             <a href="#tratamento" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-3 py-2 rounded-xl">Tratamento</a>
             <a href="#galeria" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-3 py-2 rounded-xl">Estrutura</a>
             <a href="#unidades" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-3 py-2 rounded-xl">Unidades</a>
           </div>
 
-          {/* BOTÃO WHATSAPP DIREITA */}
+          {/* LOGO LIMPA CENTRALIZADA (Ajuste de Espaçamento) */}
+          <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10 h-full items-center py-2">
+             <img 
+               src="https://cdn.agsup.com.br/grv/logo-2.png" 
+               alt="Grupo Restaura Vidas" 
+               className="h-16 lg:h-24 w-auto object-contain transition-all duration-300 my-auto" // Adicionado my-auto para centralizar verticalmente se houver sobra
+             />
+          </div>
+
+          {/* LADO DIREITO: BOTÃO WHATSAPP */}
           <div className="hidden lg:flex items-center justify-start gap-8 w-5/12 pl-12">
              <div className="text-right">
                <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
@@ -317,7 +317,7 @@ export default function App() {
             {isMenuOpen ? <X strokeWidth={1.5} /> : <Menu strokeWidth={1.5} />}
           </button>
         </div>
-
+        
         {/* MOBILE MENU */}
         <AnimatePresence>
           {isMenuOpen && (
@@ -882,6 +882,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
