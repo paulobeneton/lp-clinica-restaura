@@ -1,0 +1,14 @@
+name: Deploy with EasyPanel
+
+on:
+  push:
+    branches: ["main"]  # Altere se sua branch for outra
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger EasyPanel Deploy
+        run: |
+          curl -X POST "${{ secrets.EASYPANEL_DEPLOY_URL }}"
