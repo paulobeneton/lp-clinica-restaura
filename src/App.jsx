@@ -281,40 +281,41 @@ export default function App() {
     <div className="bg-white text-slate-800 font-sans min-h-screen antialiased selection:bg-teal-100 selection:text-teal-900">
       <GlobalStyles />
       
-      {/* HEADER */}
+{/* HEADER - LOGO DIRETA, SEM BORDA, MENU ALINHADO À DIREITA */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm h-24 transition-all duration-300">
         <div className="container mx-auto px-6 h-full flex justify-between items-center relative">
           
-          {/* MENU DIREITA */}
-          <div className="hidden lg:flex items-center justify-end gap-8 w-5/12 pr-16">
-            <a href="#tratamento" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Tratamento</a>
-            <a href="#galeria" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Estrutura</a>
-            <a href="#unidades" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Unidades</a>
+          {/* LADO ESQUERDO: LOGO DIRETA */}
+          <div className="flex items-center gap-4 lg:w-1/3">
+             <img 
+               src="https://cdn.agsup.com.br/grv/logo-2.png" 
+               alt="Grupo Restaura Vidas" 
+               className="h-16 md:h-20 w-auto object-contain" // Logo com tamanho generoso e sem box
+             />
           </div>
 
-          {/* LOGO CENTRO (Ajuste Mobile) */}
-          <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10">
-             <div className="bg-white px-4 pb-2 pt-2 rounded-b-xl lg:px-6 lg:pb-3 lg:pt-3 lg:rounded-b-2xl shadow-lg border border-slate-200 border-t-0 transition-all">
-                <img 
-                  src="https://cdn.agsup.com.br/grv/logo.png" 
-                  alt="Grupo Restaura Vidas" 
-                  className="h-16 w-auto lg:h-24 lg:w-auto object-contain transition-all duration-300"
-                />
-             </div>
+          {/* CENTRO E DIREITA: MENU DE NAVEGAÇÃO + BOTÃO (Desktop) */}
+          <div className="hidden lg:flex items-center justify-end gap-8 w-2/3">
+            {/* Links de Navegação */}
+            <div className="flex items-center gap-2 mr-4">
+              <a href="#tratamento" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Tratamento</a>
+              <a href="#galeria" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Estrutura</a>
+              <a href="#unidades" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-4 py-2 rounded-xl">Unidades</a>
+            </div>
+
+            {/* Botão WhatsApp */}
+            <div className="flex items-center gap-6 pl-6 border-l border-slate-200">
+               <div className="text-right">
+                 <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
+                 <a href={`tel:${phoneNumber}`} className="text-xl font-bold text-slate-900 hover:text-teal-600 transition font-mono">{displayPhone}</a>
+               </div>
+               <Button variant="whatsapp" onClick={() => handleWhatsApp()}>
+                 <WhatsAppIcon className="w-5 h-5" /> WhatsApp
+               </Button>
+            </div>
           </div>
 
-          {/* BOTÃO WHATSAPP DIREITA */}
-          <div className="hidden lg:flex items-center justify-start gap-8 w-5/12 pl-16">
-             <div className="text-right">
-               <span className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Plantão 24h</span>
-               <a href={`tel:${phoneNumber}`} className="text-xl font-bold text-slate-900 hover:text-teal-600 transition font-mono">{displayPhone}</a>
-             </div>
-             <Button variant="whatsapp" onClick={() => handleWhatsApp()}>
-               <WhatsAppIcon className="w-5 h-5" /> WhatsApp
-             </Button>
-          </div>
-
-          {/* MOBILE */}
+          {/* MOBILE TOGGLE */}
           <button className="lg:hidden text-slate-800 ml-auto" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X strokeWidth={1.5} /> : <Menu strokeWidth={1.5} />}
           </button>
@@ -884,3 +885,4 @@ export default function App() {
     </div>
   );
 }
+
