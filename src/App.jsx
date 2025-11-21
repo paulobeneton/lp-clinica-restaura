@@ -288,7 +288,7 @@ export default function App() {
           {/* LOGO LIMPA CENTRALIZADA (Sem box branco, sem sombra, sem borda) */}
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10 h-full items-center">
              <img 
-               src="https://cdn.agsup.com.br/grv/logo-2.png" 
+               src="https://cdn.agsup.com.br/grv/2025-logo-grupo-restaura-vidas.png" 
                alt="Grupo Restaura Vidas" 
                className="h-16 lg:h-28 w-auto object-contain transition-all duration-300 mt-2" // Aumentada e com margem superior leve
              />
@@ -882,5 +882,6 @@ export default function App() {
     </div>
   );
 }
+
 
 
