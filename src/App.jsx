@@ -263,7 +263,7 @@ export default function App() {
             <a href="#unidades" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-3 py-2 rounded-xl">Unidades</a>
           </div>
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10 h-full items-center py-2">
-             <img src="https://cdn.agsup.com.br/grv/logo-2.png" alt="Grupo Restaura Vidas" className="h-16 lg:h-28 w-auto object-contain transition-all duration-300 my-auto" loading="eager" width="200" height="80" />
+             <img src="https://cdn.agsup.com.br/grv/2025-logo-grupo-restaura-vidas.png" alt="Grupo Restaura Vidas" className="h-16 lg:h-28 w-auto object-contain transition-all duration-300 my-auto" loading="eager" width="200" height="80" />
           </div>
           <div className="hidden lg:flex items-center justify-end gap-8 w-5/12">
              <div className="text-right">
@@ -488,7 +488,7 @@ export default function App() {
            </div>
            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {[
-                { title: "Unidade Três Pontas", img: "https://cdn.agsup.com.br/grv/unidade-tres-pontas.jpeg?q=80&w=800&auto=format", address: "Condomínio Chácaras do Lago - Três Pontas, MG", phone: displayPhone, whatsappLink: "https://agsup.click/clinica-tres-pontas" },
+                { title: "Unidade Três Pontas", img: "https://cdn.agsup.com.br/grv/unidade-trespontas.jpeg?q=80&w=800&auto=format", address: "Condomínio Chácaras do Lago - Três Pontas, MG", phone: displayPhone, whatsappLink: "https://agsup.click/clinica-tres-pontas" },
                 { title: "Unidade Paraguaçu", img: "https://cdn.agsup.com.br/grv/unidade-paraguacu.jpeg?q=80&w=800&auto=format", address: "Rodovia BR 491 KM 209 - Paraguaçu, MG", phone: displayPhone, whatsappLink: "https://agsup.click/clinica-paraguacu" }
               ].map((unit, i) => (
                 <FadeIn key={i} delay={i * 0.1}>
@@ -625,3 +625,4 @@ export default function App() {
     </div>
   );
 }
+
