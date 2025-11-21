@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Phone, MapPin, Clock, Heart, ShieldCheck, 
@@ -108,8 +108,8 @@ const FadeIn = ({ children, delay = 0 }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-60px" }} // Otimização: margin negativa menor para carregar antes
-    transition={{ duration: 0.6, delay, ease: "easeOut" }} // Otimização: animação mais rápida
+    viewport={{ once: true, margin: "-60px" }} 
+    transition={{ duration: 0.6, delay, ease: "easeOut" }} 
   >
     {children}
   </motion.div>
@@ -174,8 +174,35 @@ const GalleryCarousel = () => {
   );
 };
 
+const AccordionItem = ({ question, answer, isOpen, onClick }) => (
+  <div className="border-b border-slate-200 last:border-0">
+    <button 
+      className="flex justify-between items-center w-full py-6 text-left text-slate-800 hover:text-teal-700 transition group"
+      onClick={onClick}
+    >
+      <span className={`text-lg transition-all ${isOpen ? 'font-bold text-teal-700' : 'font-medium'}`}>{question}</span>
+      <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }} className="text-slate-400 group-hover:text-teal-600">
+        <ChevronDown size={20} strokeWidth={1.5} />
+      </motion.div>
+    </button>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          className="overflow-hidden"
+        >
+          <p className="pb-6 text-slate-500 leading-relaxed font-light">{answer}</p>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </div>
+);
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
   
   // --- ESTADOS DO FORMULÁRIO ---
   const [formData, setFormData] = useState({ name: '', phone: '', city: '', subject: 'Internação para Drogas' });
@@ -184,7 +211,7 @@ export default function App() {
 
   const phoneNumber = "5535999726322";
   const displayPhone = "(35) 99972-6322";
-  const WEBHOOK_URL = ""; 
+  const WEBHOOK_URL = "https://n8n.agsup.click/webhook-test/clinica-recuperacao"; 
 
   const scrollToForm = () => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
   const handleWhatsApp = (text = '') => window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
@@ -236,7 +263,7 @@ export default function App() {
             <a href="#unidades" style={{ fontFamily: "'Funnel Display', sans-serif" }} className="text-xl font-medium text-slate-600 hover:text-teal-700 transition-colors hover:bg-slate-50 px-3 py-2 rounded-xl">Unidades</a>
           </div>
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 flex justify-center z-10 h-full items-center py-2">
-             <img src="https://cdn.agsup.com.br/grv/2025-logo-grupo-restaura-vidas.png" alt="Grupo Restaura Vidas" className="h-16 lg:h-28 w-auto object-contain transition-all duration-300 my-auto" loading="eager" width="200" height="80" />
+             <img src="https://cdn.agsup.com.br/grv/logo-2.png" alt="Grupo Restaura Vidas" className="h-16 lg:h-28 w-auto object-contain transition-all duration-300 my-auto" loading="eager" width="200" height="80" />
           </div>
           <div className="hidden lg:flex items-center justify-end gap-8 w-5/12">
              <div className="text-right">
